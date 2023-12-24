@@ -1,9 +1,16 @@
 import { useState } from "react";
 
 const COLORS = {
-  font: "#302f2f",
+  font: "#282120",
+  // font: "#302f2f",
 
-  primary: "#6A5AE0",
+  // melamar aktif : 01754f
+
+  mainBG: "#18191B",
+  bottomMenu: "#000",
+
+  primary: "#FCC636",
+  // primary: "#6A5AE0",
   secondary: "#1352ff",
   tertiary: "#FF7754",
   yellowCollor: "#ffc107",
@@ -12,9 +19,11 @@ const COLORS = {
   diskon: "#DA4549",
   merah: "#dc3545",
 
+  cardJob: "#F8C335",
+
   btnHijau: "#1ee592",
 
-  gray: "#83829A",
+  gray: "#54535f",
   gray2: "#C1C0C8",
 
   white: "#F3F4F8",

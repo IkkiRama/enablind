@@ -43,20 +43,22 @@ const Navbar = ({
             <FontAwesome name="chevron-left" size={24} color={COLORS.white} />
           </Pressable>
         ) : (
-          <Image
-            source={{
-              uri: "https://firebasestorage.googleapis.com/v0/b/react-native-crud-fireba-ea6c9.appspot.com/o/IITC%202023%2FPushInk%20Logo.png?alt=media&token=6b0f4d49-72bc-41f5-ad03-93b20613a6fa",
-            }}
-            resizeMode="contain"
-            style={{ width: 90, height: 30 }}
-          />
+          // <Image
+          //   source={{
+          //     uri: "https://firebasestorage.googleapis.com/v0/b/react-native-crud-fireba-ea6c9.appspot.com/o/IITC%202023%2FPushInk%20Logo.png?alt=media&token=6b0f4d49-72bc-41f5-ad03-93b20613a6fa",
+          //   }}
+          //   resizeMode="contain"
+          //   style={{ width: 90, height: 30 }}
+          // />
+
+          <Text style={{ fontSize: 22, fontWeight: "700" }}>Enablind</Text>
         )}
 
         {isTitle !== null ? (
           <Text
             style={{
               marginLeft: 10,
-              color: COLORS.white,
+              color: COLORS.font,
               fontWeight: "600",
               fontSize: 21,
             }}
@@ -98,11 +100,7 @@ const Navbar = ({
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         {isArtikel ? (
           <Pressable onPress={() => setChangeFontSize(!changeFontSize)}>
-            <MaterialIcons
-              name="text-fields"
-              size={24}
-              color={COLORS.lightWhite}
-            />
+            <MaterialIcons name="text-fields" size={24} color={COLORS.font} />
           </Pressable>
         ) : (
           ""
@@ -112,7 +110,7 @@ const Navbar = ({
           <Bell
             width={27}
             height={27}
-            style={{ color: COLORS.lightWhite, backgroundColor: "transparent" }}
+            style={{ color: COLORS.font, backgroundColor: "transparent" }}
           ></Bell>
           <View
             style={{
