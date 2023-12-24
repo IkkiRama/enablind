@@ -3,27 +3,13 @@ import {
   StatusBar,
   ScrollView,
   StyleSheet,
-  Text,
   View,
-  FlatList,
   SafeAreaView,
-  ActivityIndicator,
-  Dimensions,
-  Image,
-  ImageBackground,
-  Pressable,
 } from "react-native";
 import { getAuth } from "firebase/auth";
 
-import {
-  BottomMenu,
-  Navbar,
-  Fiturs,
-  PopularJobs,
-  HomeArtikel,
-} from "../../components";
+import { BottomMenu, Navbar, PopularJobs, HomeArtikel } from "../../components";
 import { COLORS, SAFEAREAVIEW, SIZES } from "../../constants";
-import { Feather } from "@expo/vector-icons";
 
 const Home = ({ navigation }) => {
   useEffect(() => {
@@ -38,7 +24,7 @@ const Home = ({ navigation }) => {
 
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
-      <Navbar></Navbar>
+      <Navbar isHomePage={true}></Navbar>
       <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar
           translucent
@@ -46,67 +32,18 @@ const Home = ({ navigation }) => {
           backgroundColor="transparent"
         ></StatusBar>
 
-        {/* Header */}
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: COLORS.primary,
-            borderBottomLeftRadius: 20,
-            borderBottomRightRadius: 20,
-            paddingBottom: 20,
-            paddingHorizontal: 30,
-            paddingTop: 20,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <Feather
-            style={{
-              padding: 10,
-              borderRadius: 50,
-              backgroundColor: COLORS.white,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-            name="user"
-            size={35}
-            color={COLORS.font}
-          />
-
-          <View style={{ width: "90%", marginLeft: 20 }}>
-            <Text
-              numberOfLines={1}
-              style={{
-                fontSize: SIZES.medium,
-                color: COLORS.font,
-                fontWeight: "500",
-              }}
-            >
-              Good Morning
-            </Text>
-            <Text
-              numberOfLines={1}
-              style={{
-                fontSize: 22,
-                color: COLORS.font,
-                fontWeight: "700",
-              }}
-            >
-              {/* Rifki Romadhan */}
-              {/* Have a nice day */}
-              Have a good rest
-              {/* Jika Atasnya Good Morning : Have a nice day. 
+        {/* Rifki Romadhan */}
+        {/* Have a nice day */}
+        {/* Have a good rest */}
+        {/* Jika Atasnya Good Morning : Have a nice day. 
               Jika Good Evening atau Good night : Have a good rest  */}
-            </Text>
-          </View>
-        </View>
+
+        <View style={styles.header}></View>
 
         {/* Main Content */}
         <View style={styles.mainWrapper}>
           {/* Artikel */}
           <HomeArtikel navigation={navigation}></HomeArtikel>
-
           {/* Job */}
           <PopularJobs></PopularJobs>
         </View>
@@ -119,8 +56,15 @@ const Home = ({ navigation }) => {
 export default Home;
 
 const styles = StyleSheet.create({
+  header: {
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    backgroundColor: COLORS.primary,
+    paddingTop: 15,
+  },
   mainWrapper: {
-    marginTop: 15,
+    paddingTop: 15,
     paddingHorizontal: 10,
+    backgroundColor: COLORS.lightWhite,
   },
 });

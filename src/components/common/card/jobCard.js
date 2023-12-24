@@ -56,7 +56,12 @@ const JobCard = () => {
           <View style={styles.infoPelamarDot}></View>
 
           <View style={styles.melamarMudah}>
-            <Image style={styles.icon} source={images.Icon}></Image>
+            <Image
+              style={styles.icon}
+              source={{
+                uri: "https://firebasestorage.googleapis.com/v0/b/react-native-crud-fireba-ea6c9.appspot.com/o/Enablind%2FLogo%20Doang.png?alt=media&token=bc2b4da5-f72f-42ae-9cd2-b6c495c3cf26",
+              }}
+            ></Image>
             <Text style={styles.melamarMudahText}>Melamar Mudah</Text>
           </View>
         </View>
@@ -143,8 +148,8 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    width: 10,
-    height: 10,
+    width: 17,
+    height: 17,
   },
 
   melamarMudahText: {

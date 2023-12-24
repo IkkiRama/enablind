@@ -1,4 +1,6 @@
 import Home from "./Home/";
-import DetailArtikel from "./Artikel/detai";
+import DetailArtikel from "./Artikel/detail";
+import Pekerjaan from "./Pekerjaan/index";
+import Artikel from "./Artikel/index";
 
-export { Home, DetailArtikel };
+export { Home, DetailArtikel, Pekerjaan, Artikel };

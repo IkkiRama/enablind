@@ -6,14 +6,8 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import Search from "../../../assets/Icons/search.svg";
-import Bell from "../../../assets/Icons/bell.svg";
-import { Image } from "react-native";
 import { COLORS } from "../../constants";
-import {
-  FontAwesome,
-  MaterialCommunityIcons,
-  MaterialIcons,
-} from "@expo/vector-icons";
+import { Ionicons, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 const Navbar = ({
   isBack,
   goBack,
@@ -22,6 +16,7 @@ const Navbar = ({
   goHome,
   isFromHome = false,
   isArtikel = false,
+  isHomePage = false,
   changeFontSize,
   setChangeFontSize,
 }) => {
@@ -31,8 +26,8 @@ const Navbar = ({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        paddingTop: 50,
-        paddingBottom: 15,
+        paddingTop: 25,
+        paddingBottom: 10,
         paddingHorizontal: 10,
         backgroundColor: COLORS.primary,
       }}
@@ -40,18 +35,25 @@ const Navbar = ({
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         {isBack ? (
           <Pressable onPress={isFromHome ? goHome : goBack}>
-            <FontAwesome name="chevron-left" size={24} color={COLORS.white} />
+            <FontAwesome name="chevron-left" size={24} color={COLORS.font} />
           </Pressable>
         ) : (
-          // <Image
-          //   source={{
-          //     uri: "https://firebasestorage.googleapis.com/v0/b/react-native-crud-fireba-ea6c9.appspot.com/o/IITC%202023%2FPushInk%20Logo.png?alt=media&token=6b0f4d49-72bc-41f5-ad03-93b20613a6fa",
-          //   }}
-          //   resizeMode="contain"
-          //   style={{ width: 90, height: 30 }}
-          // />
+          ""
+        )}
 
-          <Text style={{ fontSize: 22, fontWeight: "700" }}>Enablind</Text>
+        {isHomePage ? (
+          <View>
+            <Text style={{ fontSize: 13 }}>Welcome Back</Text>
+            <Text style={{ fontSize: 18, fontWeight: "700" }}>
+              Rifki Romadhan
+            </Text>
+          </View>
+        ) : (
+          <View>
+            <Text style={{ fontSize: 22, fontWeight: "700", marginLeft: 10 }}>
+              Enablind
+            </Text>
+          </View>
         )}
 
         {isTitle !== null ? (
@@ -106,12 +108,21 @@ const Navbar = ({
           ""
         )}
 
-        <View style={{ position: "relative", marginLeft: 15 }}>
-          <Bell
-            width={27}
-            height={27}
-            style={{ color: COLORS.font, backgroundColor: "transparent" }}
-          ></Bell>
+        <View
+          style={{
+            padding: 5,
+            borderWidth: 1,
+            borderRadius: 50,
+            position: "relative",
+            borderColor: COLORS.font,
+            marginLeft: 15,
+          }}
+        >
+          <Ionicons
+            name="ios-notifications-outline"
+            size={25}
+            color={COLORS.font}
+          />
           <View
             style={{
               width: 18,
@@ -119,8 +130,8 @@ const Navbar = ({
               justifyContent: "center",
               alignItems: "center",
               position: "absolute",
-              top: -5,
-              left: 10,
+              top: -2,
+              left: 15,
               borderRadius: 5,
               backgroundColor: COLORS.merah,
             }}
@@ -128,11 +139,11 @@ const Navbar = ({
             <Text
               style={{
                 color: COLORS.white,
-                fontSize: 10,
+                fontSize: 11,
                 fontWeight: "600",
               }}
             >
-              10
+              9+
             </Text>
           </View>
         </View>

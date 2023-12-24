@@ -30,6 +30,28 @@ const BottomMenu = ({ focused, navigationHandle }) => {
           Beranda
         </Text>
       </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.menuButton}
+        onPress={() => navigationHandle.navigate("Pekerjaan")}
+      >
+        <MaterialIcons
+          name="work"
+          size={24}
+          color={focused === "Pekerjaan" ? COLORS.primary : COLORS.gray}
+        />
+        <Text
+          style={[
+            styles.menuTextButton,
+            {
+              color: focused === "Pekerjaan" ? COLORS.primary : COLORS.gray,
+            },
+          ]}
+        >
+          Pekerjaan
+        </Text>
+      </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.menuButton}
         onPress={() => navigationHandle.navigate("Artikel")}
@@ -51,47 +73,6 @@ const BottomMenu = ({ focused, navigationHandle }) => {
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.menuButton}
-        onPress={() => navigationHandle.navigate("Merch")}
-      >
-        <FontAwesome
-          name="opencart"
-          size={24}
-          color={focused === "Merch" ? COLORS.primary : COLORS.gray}
-        />
-        <Text
-          style={[
-            styles.menuTextButton,
-            {
-              color: focused === "Merch" ? COLORS.primary : COLORS.gray,
-            },
-          ]}
-        >
-          Merch
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.menuButton}
-        onPress={() => navigationHandle.navigate("LaporAja")}
-      >
-        <FontAwesome
-          name="bullhorn"
-          size={24}
-          color={focused === "LaporAja" ? COLORS.primary : COLORS.gray}
-        />
-        <Text
-          style={[
-            styles.menuTextButton,
-            {
-              color: focused === "LaporAja" ? COLORS.primary : COLORS.gray,
-            },
-          ]}
-        >
-          LaporAja
-        </Text>
-      </TouchableOpacity>
       <TouchableOpacity
         style={styles.menuButton}
         onPress={() => navigationHandle.navigate("Profile")}
@@ -129,7 +110,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   menuButton: {
-    width: "20%",
+    width: "25%",
     justifyContent: "space-evenly",
     alignItems: "center",
   },

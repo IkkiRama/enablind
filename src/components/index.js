@@ -6,6 +6,8 @@ import AccordionItem from "./pages/profile/AccordionItem";
 import PopularJobs from "./pages/jobs/PopularJobs";
 import HomeArtikel from "./../pages/Home/HomeArtikel";
 import JobCard from "./common/card/jobCard";
+import RekomendasiArtikel from "./common/card/rekomendasiArtikel";
+import ArtikelCard from "./common/card/artikelCard";
 
 export {
   Navbar,
@@ -16,4 +18,6 @@ export {
   PopularJobs,
   HomeArtikel,
   JobCard,
+  RekomendasiArtikel,
+  ArtikelCard,
 };
