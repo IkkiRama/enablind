@@ -6,7 +6,6 @@ import {
   StatusBar,
   TextInput,
   Pressable,
-  Dimensions,
   ScrollView,
   StyleSheet,
   SafeAreaView,
@@ -15,13 +14,7 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import { FontAwesome5, Foundation } from "@expo/vector-icons";
-import {
-  BottomMenu,
-  Navbar,
-  Fiturs,
-  PopularJobs,
-  HomeArtikel,
-} from "../../components";
+import { BottomMenu, Navbar } from "../../components";
 import { COLORS, SAFEAREAVIEW, SIZES, SHADOWS } from "../../constants";
 import JobCard from "./../../components/common/card/jobCard";
 
@@ -44,7 +37,7 @@ const Pekerjaan = ({ navigation }) => {
           <KeyboardAvoidingView style={styles.searchWrapper}>
             <TextInput
               style={styles.textInputStyle}
-              placeholder="Cari Pekerjaan..."
+              placeholder="Search Jobs..."
               value={searchQuery}
               onChangeText={(value) => setSearchQuery(value)}
             />
@@ -55,13 +48,13 @@ const Pekerjaan = ({ navigation }) => {
           </KeyboardAvoidingView>
 
           <View>
-            <JobCard></JobCard>
-            <JobCard></JobCard>
-            <JobCard></JobCard>
-            <JobCard></JobCard>
-            <JobCard></JobCard>
-            <JobCard></JobCard>
-            <JobCard></JobCard>
+            <JobCard navigation={navigation}></JobCard>
+            <JobCard navigation={navigation}></JobCard>
+            <JobCard navigation={navigation}></JobCard>
+            <JobCard navigation={navigation}></JobCard>
+            <JobCard navigation={navigation}></JobCard>
+            <JobCard navigation={navigation}></JobCard>
+            <JobCard navigation={navigation}></JobCard>
           </View>
         </View>
       </ScrollView>

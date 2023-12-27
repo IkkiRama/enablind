@@ -11,6 +11,7 @@ import {
   Bantuan,
   FAQ,
   LaporEror,
+  DetailJob,
 } from "./src/pages";
 import Register from "./src/pages/Auth/register";
 import TentangAplikasi from "./src/pages/Profile/tentangAplikasi";
@@ -84,6 +85,12 @@ export default function App() {
         <Stack.Screen
           name="LaporEror"
           component={LaporEror}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="DetailJob"
+          component={DetailJob}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

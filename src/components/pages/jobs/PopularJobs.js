@@ -3,7 +3,7 @@ import React from "react";
 import { COLORS } from "../../../constants";
 import JobCard from "../../common/card/jobCard";
 
-const PopularJobs = () => {
+const PopularJobs = ({ navigation }) => {
   return (
     <View>
       <View style={styles.header}>
@@ -11,10 +11,10 @@ const PopularJobs = () => {
         {/* <Text style={styles.textShowAll}>Show all</Text> */}
       </View>
       <View>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
+        <JobCard navigation={navigation}></JobCard>
+        <JobCard navigation={navigation}></JobCard>
+        <JobCard navigation={navigation}></JobCard>
+        <JobCard navigation={navigation}></JobCard>
       </View>
     </View>
   );

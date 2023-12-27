@@ -9,6 +9,7 @@ import FAQ from "./Profile/faq";
 import Bantuan from "./Profile/bantuan";
 import TentangAplikasi from "./Profile/tentangAplikasi";
 import LaporEror from "./Profile/laporEror";
+import DetailJob from "./Pekerjaan/detail";
 
 export {
   Home,
@@ -22,4 +23,5 @@ export {
   Bantuan,
   TentangAplikasi,
   LaporEror,
+  DetailJob,
 };

@@ -8,6 +8,10 @@ import HomeArtikel from "./../pages/Home/HomeArtikel";
 import JobCard from "./common/card/jobCard";
 import RekomendasiArtikel from "./common/card/rekomendasiArtikel";
 import ArtikelCard from "./common/card/artikelCard";
+import JobTabs from "./pages/jobs/tabs/tabs";
+import Qualifications from "./pages/jobs/tabs/qualifications";
+import JobDescriptions from "./pages/jobs/tabs/descriptions";
+import OtherInfo from "./pages/jobs/tabs/otherInfo";
 
 export {
   Navbar,
@@ -20,4 +24,8 @@ export {
   JobCard,
   RekomendasiArtikel,
   ArtikelCard,
+  JobTabs,
+  Qualifications,
+  JobDescriptions,
+  OtherInfo,
 };

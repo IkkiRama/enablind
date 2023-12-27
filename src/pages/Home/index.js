@@ -53,12 +53,6 @@ const Home = ({ navigation }) => {
           backgroundColor="transparent"
         ></StatusBar>
 
-        {/* Rifki Romadhan */}
-        {/* Have a nice day */}
-        {/* Have a good rest */}
-        {/* Jika Atasnya Good Morning : Have a nice day. 
-              Jika Good Evening atau Good night : Have a good rest  */}
-
         <View style={styles.header}></View>
 
         {/* Main Content */}
@@ -66,7 +60,7 @@ const Home = ({ navigation }) => {
           {/* Artikel */}
           <HomeArtikel navigation={navigation}></HomeArtikel>
           {/* Job */}
-          <PopularJobs></PopularJobs>
+          <PopularJobs navigation={navigation}></PopularJobs>
         </View>
       </ScrollView>
       <BottomMenu focused="Beranda" navigationHandle={navigation} />

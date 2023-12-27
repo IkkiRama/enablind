@@ -53,20 +53,20 @@ const DetailArtikel = ({ route, navigation }) => {
   const ukuranFont = [
     {
       fontSize: 14,
-      title: "Kecil",
+      title: "Small",
     },
     {
       fontSize: 16,
-      title: "Sedang",
+      title: "Medium",
     },
     {
       fontSize: 20,
-      title: "Besar",
+      title: "Large",
     },
   ];
   const [ukuranFontActive, setUkuranFontActive] = useState({
     fontSize: 16,
-    title: "Sedang",
+    title: "Medium",
   });
 
   return (
@@ -88,7 +88,7 @@ const DetailArtikel = ({ route, navigation }) => {
           <View style={styles.changeFontSize}>
             <View style={styles.changeFontSizeTitleContainer}>
               <MaterialIcons name="text-fields" size={30} color={COLORS.font} />
-              <Text style={styles.changeFontSizeTitle}>Ukuran Font</Text>
+              <Text style={styles.changeFontSizeTitle}>Font Size</Text>
             </View>
             <View style={styles.changeFontSizeButtonContainer}>
               {ukuranFont.map((ukuran, i) => (
@@ -113,8 +113,8 @@ const DetailArtikel = ({ route, navigation }) => {
           {/* change font isArtikel */}
           <Text style={styles.titleArtikel}>{artikel.judul}</Text>
           <Text style={styles.authorArtikelContainer}>
-            Ditulis oleh{" "}
-            <Text style={styles.authorArtikel}>{artikel.penulis} </Text> tanggal{" "}
+            Written by{" "}
+            <Text style={styles.authorArtikel}>{artikel.penulis} </Text> at{" "}
             {artikel.terbit}
           </Text>
           <View style={styles.kategoriContainer}>
@@ -139,7 +139,7 @@ const DetailArtikel = ({ route, navigation }) => {
           </View>
 
           <View style={styles.rekomendasiArtikelContainer}>
-            <Text style={styles.sectionTitle}>Rekomendasi Artikel</Text>
+            <Text style={styles.sectionTitle}>Recommended Article</Text>
             <FlatList
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -155,7 +155,7 @@ const DetailArtikel = ({ route, navigation }) => {
             />
 
             <View style={styles.artikelBaru}>
-              <Text style={styles.sectionTitle}>Artikel Terbaru</Text>
+              <Text style={styles.sectionTitle}>Latest Article</Text>
               {artikelTerbaruKeys.map((key) => (
                 <ArtikelCard
                   key={key}

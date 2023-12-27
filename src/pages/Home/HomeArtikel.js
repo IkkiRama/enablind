@@ -48,17 +48,10 @@ const HomeArtikel = ({ navigation }) => {
 
   return (
     <View>
-      {/* <View style={styles.header}>
-        <Text style={{ fontSize: 18, fontWeight: "600", marginBottom: 10 }}>
-          Popular Artikel
-        </Text>
-        <Text>Show all</Text>
-      </View> */}
       {SeriesArtikelKeys.length > 0 ? (
         <FlatList
           horizontal
           data={showSeriesArtikelKeys}
-          // pagingEnabled={true}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <Pressable
@@ -81,22 +74,6 @@ const HomeArtikel = ({ navigation }) => {
                 }}
                 imageStyle={{ borderRadius: 10 }}
               >
-                {/* Kategori */}
-                <View
-                  style={{
-                    top: 10,
-                    left: 10,
-                    position: "absolute",
-                    paddingHorizontal: 20,
-                    paddingVertical: 5,
-                    backgroundColor: COLORS.primary,
-                    borderRadius: 10,
-                  }}
-                >
-                  <Text style={{ fontSize: 14, fontWeight: "600" }}>
-                    Pendidikan
-                  </Text>
-                </View>
                 <LinearGradient
                   colors={["transparent", "#767676e9", "#5c5c5c", "#3d3d3d"]}
                   style={{

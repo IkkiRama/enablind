@@ -26,7 +26,7 @@ const ArtikelCard = ({ navigation, artikel }) => {
         <Text style={styles.titleArtikel} numberOfLines={3}>
           {artikel.judul}
         </Text>
-        <Text style={styles.tanggalArtikel}>Ditulis pada {artikel.terbit}</Text>
+        <Text style={styles.tanggalArtikel}>Written at {artikel.terbit}</Text>
       </View>
     </Pressable>
   );

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View, Pressable } from "react-native";
 
 import { COLORS, images } from "../../../constants";
 import AktifMerekrut from "../../../../assets/Icons/aktif-merekrut.svg";
@@ -22,9 +22,12 @@ const RenderImage = ({ link }) => {
   );
 };
 
-const JobCard = () => {
+const JobCard = ({ navigation }) => {
   return (
-    <View style={styles.wrapper}>
+    <Pressable
+      onPress={() => navigation.navigate("DetailJob")}
+      style={styles.wrapper}
+    >
       <RenderImage link="https://media.licdn.com/dms/image/C4D0BAQHCmfKRtPXKDg/company-logo_100_100/0/1658813682786/gojek_logo?e=1711584000&v=beta&t=uCPSb0bbTB3Z1OTHflnVtDS_PqpO5rItxDUkidBhz1w" />
 
       <View style={styles.infoJob}>
@@ -66,7 +69,7 @@ const JobCard = () => {
           </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
