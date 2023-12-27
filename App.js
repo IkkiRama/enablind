@@ -12,6 +12,7 @@ import {
   FAQ,
   LaporEror,
   DetailJob,
+  FormApplay,
 } from "./src/pages";
 import Register from "./src/pages/Auth/register";
 import TentangAplikasi from "./src/pages/Profile/tentangAplikasi";
@@ -91,6 +92,12 @@ export default function App() {
         <Stack.Screen
           name="DetailJob"
           component={DetailJob}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="FormApplay"
+          component={FormApplay}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

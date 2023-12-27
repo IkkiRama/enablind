@@ -54,21 +54,6 @@ const Navbar = ({
           </View>
         )}
 
-        {isTitle !== null ? (
-          <Text
-            style={{
-              marginLeft: 10,
-              color: COLORS.font,
-              fontWeight: "600",
-              fontSize: 21,
-            }}
-          >
-            {isTitle}
-          </Text>
-        ) : (
-          ""
-        )}
-
         {/* Search */}
         {withForm ? (
           <KeyboardAvoidingView
@@ -97,6 +82,21 @@ const Navbar = ({
           ""
         )}
       </View>
+
+      {isTitle !== null ? (
+        <Text
+          style={{
+            color: COLORS.font,
+            fontWeight: "600",
+            fontSize: 21,
+          }}
+        >
+          {isTitle}
+        </Text>
+      ) : (
+        ""
+      )}
+
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         {isArtikel ? (
           <Pressable onPress={() => setChangeFontSize(!changeFontSize)}>
@@ -113,7 +113,6 @@ const Navbar = ({
             borderRadius: 50,
             position: "relative",
             borderColor: COLORS.font,
-            marginLeft: 15,
           }}
         >
           <Ionicons
