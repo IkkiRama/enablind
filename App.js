@@ -1,7 +1,19 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { Home, DetailArtikel, Pekerjaan, Artikel } from "./src/pages";
+import {
+  Home,
+  DetailArtikel,
+  Pekerjaan,
+  Artikel,
+  Login,
+  Profile,
+  Bantuan,
+  FAQ,
+  LaporEror,
+} from "./src/pages";
+import Register from "./src/pages/Auth/register";
+import TentangAplikasi from "./src/pages/Profile/tentangAplikasi";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +42,48 @@ export default function App() {
         <Stack.Screen
           name="Artikel"
           component={Artikel}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Bantuan"
+          component={Bantuan}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="TentangAplikasi"
+          component={TentangAplikasi}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="FAQ"
+          component={FAQ}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="LaporEror"
+          component={LaporEror}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

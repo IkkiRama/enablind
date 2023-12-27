@@ -62,13 +62,6 @@ const Pekerjaan = ({ navigation }) => {
             <JobCard></JobCard>
             <JobCard></JobCard>
             <JobCard></JobCard>
-            <JobCard></JobCard>
-            <JobCard></JobCard>
-            <JobCard></JobCard>
-            <JobCard></JobCard>
-            <JobCard></JobCard>
-            <JobCard></JobCard>
-            <JobCard></JobCard>
           </View>
         </View>
       </ScrollView>

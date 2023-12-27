@@ -71,7 +71,7 @@ const Artikel = ({ navigation }) => {
             {dataArtikelKeys.length > 0 ? (
               <>
                 <View style={styles.artikelBaruContainer}>
-                  <Text style={styles.sectionTitle}>Artikel Terbaru</Text>
+                  <Text style={styles.sectionTitle}>Latest Article</Text>
                   {artikelPalingBaruKeys.map((key) => (
                     <Pressable
                       key={key}
@@ -99,7 +99,7 @@ const Artikel = ({ navigation }) => {
                           {dataArtikel[key].judul}
                         </Text>
                         <Text numberOfLines={3} style={styles.excerptArtikel}>
-                          {dataArtikel[key].konten}
+                          {dataArtikel[key].konten.slice(0, 150)}
                         </Text>
                       </View>
                     </Pressable>
@@ -116,7 +116,7 @@ const Artikel = ({ navigation }) => {
                 </View>
 
                 <View style={styles.rekomendasiArtikelContainer}>
-                  <Text style={styles.sectionTitle}>Rekomendasi Artikel</Text>
+                  <Text style={styles.sectionTitle}>Recommended Article</Text>
                   <FlatList
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -133,7 +133,7 @@ const Artikel = ({ navigation }) => {
                 </View>
 
                 <View style={styles.artikelPopulerContainer}>
-                  <Text style={styles.sectionTitle}>Artikel Terpopuler</Text>
+                  <Text style={styles.sectionTitle}>Feature Article</Text>
                   <View style={styles.artikelPopuler}>
                     {artikelPopulerKeys.map((key) => (
                       <ArtikelCard

@@ -15,23 +15,6 @@ const PopularJobs = () => {
         <JobCard></JobCard>
         <JobCard></JobCard>
         <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
-        <JobCard></JobCard>
       </View>
     </View>
   );

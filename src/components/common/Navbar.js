@@ -19,6 +19,8 @@ const Navbar = ({
   isHomePage = false,
   changeFontSize,
   setChangeFontSize,
+  smallMessage,
+  mainMessage,
 }) => {
   return (
     <View
@@ -37,15 +39,11 @@ const Navbar = ({
           <Pressable onPress={isFromHome ? goHome : goBack}>
             <FontAwesome name="chevron-left" size={24} color={COLORS.font} />
           </Pressable>
-        ) : (
-          ""
-        )}
-
-        {isHomePage ? (
+        ) : isHomePage ? (
           <View>
-            <Text style={{ fontSize: 13 }}>Welcome Back</Text>
+            <Text style={{ fontSize: 14 }}>{smallMessage}</Text>
             <Text style={{ fontSize: 18, fontWeight: "700" }}>
-              Rifki Romadhan
+              {mainMessage}
             </Text>
           </View>
         ) : (

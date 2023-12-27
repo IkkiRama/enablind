@@ -7,24 +7,45 @@ import {
   SafeAreaView,
 } from "react-native";
 import { getAuth } from "firebase/auth";
+import { ref, onValue } from "firebase/database";
+import { db } from "../../configs/firebase";
 
 import { BottomMenu, Navbar, PopularJobs, HomeArtikel } from "../../components";
 import { COLORS, SAFEAREAVIEW, SIZES } from "../../constants";
 
 const Home = ({ navigation }) => {
+  const auth = getAuth();
+  let userLogin;
+  const [dataUser, setDataUser] = useState({});
+  const dataUserKeys = Object.keys(dataUser);
+
   useEffect(() => {
-    // if (auth.currentUser !== null) {
-    //   onValue(ref(db, "User"), (querySnapShot) => {
-    //     let data = querySnapShot.val() || {};
-    //     let dataUser = { ...data };
-    //     setDataUser(dataUser);
-    //   });
-    // }
+    if (auth.currentUser !== null) {
+      onValue(ref(db, "User"), (querySnapShot) => {
+        let data = querySnapShot.val() || {};
+        let dataUser = { ...data };
+        setDataUser(dataUser);
+      });
+    }
   }, []);
+
+  dataUserKeys.map((key) => {
+    if (dataUser[key].email === auth.currentUser.email) {
+      JSON.stringify((userLogin = dataUser[key]));
+    }
+  });
 
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
-      <Navbar isHomePage={true}></Navbar>
+      <Navbar
+        isHomePage={true}
+        smallMessage={dataUserKeys.length === 0 ? "Hii" : `Welcome Back`}
+        mainMessage={
+          dataUserKeys.length === 0
+            ? "Welcome to our app"
+            : `${userLogin?.nama}👋`
+        }
+      ></Navbar>
       <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar
           translucent
@@ -60,7 +81,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
     backgroundColor: COLORS.primary,
-    paddingTop: 15,
+    paddingTop: 20,
   },
   mainWrapper: {
     paddingTop: 15,
