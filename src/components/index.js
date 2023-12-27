@@ -12,6 +12,8 @@ import JobTabs from "./pages/jobs/tabs/tabs";
 import Qualifications from "./pages/jobs/tabs/qualifications";
 import JobDescriptions from "./pages/jobs/tabs/descriptions";
 import OtherInfo from "./pages/jobs/tabs/otherInfo";
+import AllJobs from "./pages/jobs/Job Application/AllJobs";
+import MyApplication from "./pages/jobs/Job Application/MyApplication";
 
 export {
   Navbar,
@@ -28,4 +30,6 @@ export {
   Qualifications,
   JobDescriptions,
   OtherInfo,
+  AllJobs,
+  MyApplication,
 };

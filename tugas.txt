@@ -1,2 +1,27 @@
 sesuaikan faq
 Tambahkan aksesbilitas
+
+Pekerjaan jika sudah final accept itu dikasih selamat
+Pekerjaan jika sudah interview itu dikasih pemberitahuan interviewnya online apa off dan dimana, jika online link nya dikasih, jika offline dikasih tau alamatnya.
+
+Setiap Lamaran pekerjaan maka dikasih tau timeline nya
+
+
+
+
+Skema tabel di database pekerjaan
+
+{
+    Job Title : 
+    Company : 
+    Job Description
+    Job Qualifications (comma-separated & pakai array) ( pakai metod split untuk mendeteksi koma )
+    Type Job (full time, part time, contract)
+    Job Salary
+    Image Company (opt)
+    Jumlah Pelamar
+}
+
+
+
+

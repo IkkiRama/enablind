@@ -15,34 +15,33 @@ const RenderImage = ({ link }) => {
         isLoadedImage
           ? images.defaultBanner
           : {
-              uri: "https://media.licdn.com/dms/image/C4D0BAQHCmfKRtPXKDg/company-logo_100_100/0/1658813682786/gojek_logo?e=1711584000&v=beta&t=uCPSb0bbTB3Z1OTHflnVtDS_PqpO5rItxDUkidBhz1w",
+              uri: link,
             }
       }
+      resizeMode="contain"
     />
   );
 };
 
-const JobCard = ({ navigation }) => {
+const JobCard = ({ navigation, data }) => {
   return (
     <Pressable
-      onPress={() => navigation.navigate("DetailJob")}
+      onPress={() => navigation.navigate("DetailJob", { data })}
       style={styles.wrapper}
     >
-      <RenderImage link="https://media.licdn.com/dms/image/C4D0BAQHCmfKRtPXKDg/company-logo_100_100/0/1658813682786/gojek_logo?e=1711584000&v=beta&t=uCPSb0bbTB3Z1OTHflnVtDS_PqpO5rItxDUkidBhz1w" />
+      <RenderImage link={data["Image Company"]} />
 
       <View style={styles.infoJob}>
         {/* Title */}
         <View style={styles.textWrapper}>
           <View>
-            <Text style={styles.titleJobText}>Software Engginer</Text>
-            <Text style={styles.companyText}>Tokopedia</Text>
+            <Text style={styles.titleJobText}>{data["Job Title"]}</Text>
+            <Text style={styles.companyText}>{data["Company"]}</Text>
           </View>
 
           <Ionicons name="ios-bookmark-outline" size={25} color={COLORS.font} />
         </View>
-        <Text style={styles.locationText}>
-          Jakarta, Jakarta Raya, Indonesia (Dalam Kantor)
-        </Text>
+        <Text style={styles.locationText}>{data["Job Location"]}</Text>
 
         <View style={styles.aktifMerekrut}>
           <AktifMerekrut
@@ -54,7 +53,9 @@ const JobCard = ({ navigation }) => {
         </View>
 
         <View style={styles.infoPelamar}>
-          <Text style={styles.infoPelamarText}>14 Pelamar</Text>
+          <Text style={styles.infoPelamarText}>
+            {data["Jumlah Pelamar"]} Pelamar
+          </Text>
 
           <View style={styles.infoPelamarDot}></View>
 

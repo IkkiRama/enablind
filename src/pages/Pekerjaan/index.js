@@ -1,27 +1,31 @@
 import {
   Text,
   View,
-  Image,
-  FlatList,
   StatusBar,
-  TextInput,
   Pressable,
   ScrollView,
   StyleSheet,
   SafeAreaView,
-  ActivityIndicator,
-  KeyboardAvoidingView,
+  Dimensions,
 } from "react-native";
-import { useState, useEffect } from "react";
-import { FontAwesome5, Foundation } from "@expo/vector-icons";
-import { BottomMenu, Navbar } from "../../components";
-import { COLORS, SAFEAREAVIEW, SIZES, SHADOWS } from "../../constants";
-import JobCard from "./../../components/common/card/jobCard";
+import React, { useEffect, useState } from "react";
+import { AllJobs, BottomMenu, MyApplication, Navbar } from "../../components";
+import { COLORS, SAFEAREAVIEW, SHADOWS } from "../../constants";
 
 const Pekerjaan = ({ navigation }) => {
-  const [dataPekerjaan, setDataPekerjaan] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredPekerjaan, setFilteredPekerjaan] = useState([]);
+  const minHeightPage = Dimensions.get("window").height;
+
+  const jobApplication = ["All Jobs", "My Application"];
+  const [jobApplicationActive, setJobApplicationActive] = useState("All Jobs");
+
+  const displayTabContent = () => {
+    switch (jobApplicationActive) {
+      case "All Jobs":
+        return <AllJobs navigation={navigation} />;
+      case "My Application":
+        return <MyApplication navigation={navigation} />;
+    }
+  };
 
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
@@ -33,29 +37,25 @@ const Pekerjaan = ({ navigation }) => {
           backgroundColor="transparent"
         ></StatusBar>
 
-        <View style={styles.mainWrapper}>
-          <KeyboardAvoidingView style={styles.searchWrapper}>
-            <TextInput
-              style={styles.textInputStyle}
-              placeholder="Search Jobs..."
-              value={searchQuery}
-              onChangeText={(value) => setSearchQuery(value)}
-            />
-
-            <Pressable style={styles.searchIcon}>
-              <FontAwesome5 name="search" size={24} color={COLORS.font} />
-            </Pressable>
-          </KeyboardAvoidingView>
-
-          <View>
-            <JobCard navigation={navigation}></JobCard>
-            <JobCard navigation={navigation}></JobCard>
-            <JobCard navigation={navigation}></JobCard>
-            <JobCard navigation={navigation}></JobCard>
-            <JobCard navigation={navigation}></JobCard>
-            <JobCard navigation={navigation}></JobCard>
-            <JobCard navigation={navigation}></JobCard>
+        <View style={styles.mainWrapper(minHeightPage)}>
+          <View style={styles.mainJobApplicationWrapper}>
+            {jobApplication.map((perJobApplication, i) => (
+              <Pressable
+                onPress={() => setJobApplicationActive(perJobApplication)}
+                style={styles.JobApplicationButton(
+                  perJobApplication,
+                  jobApplicationActive
+                )}
+                key={i}
+              >
+                <Text style={styles.JobApplicationText}>
+                  {perJobApplication}
+                </Text>
+              </Pressable>
+            ))}
           </View>
+
+          {displayTabContent()}
         </View>
       </ScrollView>
       <BottomMenu focused="Pekerjaan" navigationHandle={navigation} />
@@ -66,37 +66,30 @@ const Pekerjaan = ({ navigation }) => {
 export default Pekerjaan;
 
 const styles = StyleSheet.create({
-  mainWrapper: {
+  mainWrapper: (minHeightPage) => ({
     paddingTop: 15,
     paddingHorizontal: 10,
+    minHeight: minHeightPage - 100,
     backgroundColor: COLORS.lightWhite,
-  },
-  searchWrapper: {
-    width: "100%",
-    position: "relative",
+  }),
+
+  mainJobApplicationWrapper: {
+    flexDirection: "row",
+    justifyContent: "center",
     marginBottom: 20,
   },
-  textInputStyle: {
-    borderWidth: 1,
-    borderColor: COLORS.borderColor,
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    backgroundColor: COLORS.borderColor,
-    borderRadius: 10,
-    fontSize: 18,
-    fontWeight: "500",
-    color: COLORS.font,
-    ...SHADOWS.hard,
-  },
-  searchIcon: {
-    top: 0,
-    right: 0,
-    height: "100%",
-    position: "absolute",
-    paddingHorizontal: 20,
+  JobApplicationButton: (jobApplicationActive, perJobApplication) => ({
+    width: "50%",
     justifyContent: "center",
-    backgroundColor: COLORS.borderColor,
-    borderBottomRightRadius: 10,
-    borderTopRightRadius: 10,
+    alignItems: "center",
+    padding: 15,
+    backgroundColor:
+      perJobApplication === jobApplicationActive
+        ? COLORS.primary
+        : COLORS.lightWhite,
+    borderRadius: 10,
+  }),
+  JobApplicationText: {
+    fontWeight: "600",
   },
 });
