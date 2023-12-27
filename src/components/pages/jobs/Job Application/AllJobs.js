@@ -21,6 +21,7 @@ const AllJobs = ({ navigation }) => {
         navigation={navigation}
         data={dataPekerjaan[id_pekerjaan]}
         key={id_pekerjaan}
+        id={id_pekerjaan}
       ></JobCard>
     ));
 

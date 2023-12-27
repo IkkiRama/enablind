@@ -8,6 +8,17 @@ Setiap Lamaran pekerjaan maka dikasih tau timeline nya
 
 
 
+BESOK
+Dump way Lamaran
+
+select semua pekerjaan, select semua lamaran
+
+filter lamaran menggunakan email user
+
+filter pekerjaan dengan id yang udah masuk ke lamaran
+
+join data
+
 
 Skema tabel di database pekerjaan
 

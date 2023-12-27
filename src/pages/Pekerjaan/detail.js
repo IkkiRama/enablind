@@ -18,7 +18,7 @@ import {
 } from "../../components";
 import { COLORS, SAFEAREAVIEW, SHADOWS } from "../../constants";
 const DetailJob = ({ route, navigation }) => {
-  const { data } = route.params;
+  const { data, id } = route.params;
   const tabs = ["Descriptions", "Qualifications", "Other info"];
   const [activeTab, setActiveTab] = useState(tabs[0]);
   const otherInfo = {
@@ -90,7 +90,7 @@ const DetailJob = ({ route, navigation }) => {
       <View style={styles.buttonContainer}>
         <Pressable
           style={styles.buttonApply}
-          onPress={() => navigation.navigate("FormApplay")}
+          onPress={() => navigation.navigate("FormApplay", { id })}
         >
           <Text style={styles.buttonApplyText}>APPLY NOW</Text>
         </Pressable>

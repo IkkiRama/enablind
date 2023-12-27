@@ -23,10 +23,10 @@ const RenderImage = ({ link }) => {
   );
 };
 
-const JobCard = ({ navigation, data }) => {
+const JobCard = ({ navigation, data, id }) => {
   return (
     <Pressable
-      onPress={() => navigation.navigate("DetailJob", { data })}
+      onPress={() => navigation.navigate("DetailJob", { data, id })}
       style={styles.wrapper}
     >
       <RenderImage link={data["Image Company"]} />
