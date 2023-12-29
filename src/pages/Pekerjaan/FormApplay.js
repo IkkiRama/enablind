@@ -90,6 +90,10 @@ const FormApplay = ({ navigation, route }) => {
         id_pekerjaan: id,
         nama: userLogin?.nama,
         email: userLogin?.email,
+        "Status Lamaran": {
+          status: "Pending",
+          tempat: "",
+        },
         phoneHumber,
         houseAddress,
         summary,

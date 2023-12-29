@@ -1,8 +1,9 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import { db } from "../../../../configs/firebase";
 import JobCard from "../../../common/card/jobCard";
+import { styles } from "./../tabs/style";
 
 const AllJobs = ({ navigation }) => {
   const [dataPekerjaan, setDataPekerjaan] = useState([]);
@@ -39,14 +40,3 @@ const AllJobs = ({ navigation }) => {
 };
 
 export default AllJobs;
-
-const styles = StyleSheet.create({
-  noJobContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  noJobText: {
-    fontSize: 18,
-    fontWeight: "600",
-  },
-});

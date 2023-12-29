@@ -2,7 +2,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   TextInput,
   Image,
   SafeAreaView,
@@ -14,13 +13,11 @@ import {
 
 import {
   getAuth,
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 
-import { db } from "../../configs/firebase";
 import { COLORS } from "../../constants";
 const backImage = require("../../../assets/Images/backImage.png");
 

@@ -99,7 +99,10 @@ const Navbar = ({
 
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         {isArtikel ? (
-          <Pressable onPress={() => setChangeFontSize(!changeFontSize)}>
+          <Pressable
+            onPress={() => setChangeFontSize(!changeFontSize)}
+            style={{ marginRight: 15 }}
+          >
             <MaterialIcons name="text-fields" size={24} color={COLORS.font} />
           </Pressable>
         ) : (
@@ -108,11 +111,9 @@ const Navbar = ({
 
         <View
           style={{
-            padding: 5,
-            borderWidth: 1,
             borderRadius: 50,
             position: "relative",
-            borderColor: COLORS.font,
+            marginRight: 5,
           }}
         >
           <Ionicons
@@ -127,8 +128,8 @@ const Navbar = ({
               justifyContent: "center",
               alignItems: "center",
               position: "absolute",
-              top: -2,
-              left: 15,
+              top: -3,
+              left: 12,
               borderRadius: 5,
               backgroundColor: COLORS.merah,
             }}

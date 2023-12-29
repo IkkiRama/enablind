@@ -5,7 +5,6 @@ import {
   SafeAreaView,
   StatusBar,
   ScrollView,
-  Dimensions,
   Alert,
   Pressable,
 } from "react-native";
@@ -23,7 +22,6 @@ import { getAuth, signOut } from "firebase/auth";
 import { db } from "../../configs/firebase";
 import { BottomMenu, Navbar } from "../../components";
 import { COLORS, SAFEAREAVIEW } from "../../constants";
-import * as OpenAnything from "react-native-openanything";
 
 const Profile = ({ navigation }) => {
   const auth = getAuth();
