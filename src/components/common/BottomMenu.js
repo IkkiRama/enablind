@@ -105,8 +105,7 @@ const styles = StyleSheet.create({
     // height: 50,
     paddingVertical: 10,
     backgroundColor: COLORS.lightWhite,
-    ...SHADOWS.medium,
-    elevation: 2,
+    elevation: 15,
     flexDirection: "row",
   },
   menuButton: {

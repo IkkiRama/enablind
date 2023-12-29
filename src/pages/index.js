@@ -11,6 +11,7 @@ import TentangAplikasi from "./Profile/tentangAplikasi";
 import LaporEror from "./Profile/laporEror";
 import DetailJob from "./Pekerjaan/detail";
 import FormApplay from "./Pekerjaan/FormApplay";
+import DetailLamaran from "./Pekerjaan/detailLamaran";
 
 export {
   Home,
@@ -26,4 +27,5 @@ export {
   LaporEror,
   DetailJob,
   FormApplay,
+  DetailLamaran,
 };

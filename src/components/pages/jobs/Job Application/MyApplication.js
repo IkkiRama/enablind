@@ -23,7 +23,6 @@ import { ref, push, onValue } from "firebase/database";
 
 import { db } from "../../../../configs/firebase";
 import LamaranCard from "../../../common/card/lamaranCard";
-import { styles } from "./../tabs/style";
 
 const MyApplication = ({ navigation }) => {
   const auth = getAuth();
@@ -99,3 +98,14 @@ const MyApplication = ({ navigation }) => {
 };
 
 export default MyApplication;
+
+const styles = StyleSheet.create({
+  noJobContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  noJobText: {
+    fontSize: 18,
+    fontWeight: "600",
+  },
+});

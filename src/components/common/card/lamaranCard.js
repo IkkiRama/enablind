@@ -26,7 +26,6 @@ const LamaranCard = ({ navigation, dataLamaran, dataPekerjaan, id }) => {
     <Pressable
       onPress={() =>
         navigation.navigate("DetailLamaran", {
-          navigation,
           dataLamaran,
           dataPekerjaan,
           id,

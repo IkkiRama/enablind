@@ -28,8 +28,8 @@ const Navbar = ({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        paddingTop: 25,
-        paddingBottom: 10,
+        paddingTop: 30,
+        paddingBottom: 15,
         paddingHorizontal: 10,
         backgroundColor: COLORS.primary,
       }}

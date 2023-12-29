@@ -6,6 +6,8 @@ const COLORS = {
 
   // melamar aktif : 01754f
 
+  // ungu apik 764ABC
+
   mainBG: "#18191B",
   bottomMenu: "#000",
 
