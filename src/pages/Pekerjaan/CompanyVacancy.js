@@ -9,21 +9,22 @@ import {
   Dimensions,
 } from "react-native";
 import React, { useState } from "react";
-import { AllJobs, BottomMenu, MyApplication, Navbar } from "../../components";
+import { Applicants, BottomMenu, MyVacancy, Navbar } from "../../components";
 import { COLORS, SAFEAREAVIEW } from "../../constants";
 
-const Pekerjaan = ({ navigation }) => {
+const CompanyVacancy = ({ navigation }) => {
   const minHeightPage = Dimensions.get("window").height;
 
-  const jobApplication = ["All Jobs", "My Application"];
-  const [jobApplicationActive, setJobApplicationActive] = useState("All Jobs");
+  const jobApplication = ["All My Vacancy", "Applicants"];
+  const [jobApplicationActive, setJobApplicationActive] =
+    useState("All My Vacancy");
 
   const displayTabContent = () => {
     switch (jobApplicationActive) {
-      case "All Jobs":
-        return <AllJobs navigation={navigation} />;
-      case "My Application":
-        return <MyApplication navigation={navigation} />;
+      case "All My Vacancy":
+        return <MyVacancy navigation={navigation} />;
+      case "Applicants":
+        return <Applicants navigation={navigation} />;
     }
   };
 
@@ -63,7 +64,7 @@ const Pekerjaan = ({ navigation }) => {
   );
 };
 
-export default Pekerjaan;
+export default CompanyVacancy;
 
 const styles = StyleSheet.create({
   mainWrapper: (minHeightPage) => ({

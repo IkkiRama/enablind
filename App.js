@@ -14,6 +14,7 @@ import {
   DetailJob,
   FormApplay,
   DetailLamaran,
+  CompanyVacancy,
 } from "./src/pages";
 import Register from "./src/pages/Auth/register";
 import TentangAplikasi from "./src/pages/Profile/tentangAplikasi";
@@ -105,6 +106,12 @@ export default function App() {
         <Stack.Screen
           name="DetailLamaran"
           component={DetailLamaran}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="CompanyVacancy"
+          component={CompanyVacancy}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

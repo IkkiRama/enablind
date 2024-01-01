@@ -5,14 +5,14 @@ Pekerjaan jika sudah final accept itu dikasih selamat
 Pekerjaan jika sudah interview itu dikasih pemberitahuan interviewnya online apa off dan dimana, jika online link nya dikasih, jika offline dikasih tau alamatnya.
 
 
-
-Ketika Lamar pekerjaan, jumlah Pelamar++
-
+Bug on MyVacancy.js renderPekerjaan
 
 
 
-Ketika update jumlah pelamar, maka yang di updtae semua data pekerjaan dengan id yang sama, bukan hanya update jumlah pelamarnya
 
+Ketika user upload pp / ubah nama Company,
+maka update job yang user upload pp bikin di update image nya,
+maka ngga usah add query lagi
 
 
 

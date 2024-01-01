@@ -16,6 +16,8 @@ import AllJobs from "./pages/jobs/Job Application/AllJobs";
 import MyApplication from "./pages/jobs/Job Application/MyApplication";
 import MyInformation from "./pages/jobs/Detaill Application/MyInformation";
 import JourneyApplication from "./pages/jobs/Detaill Application/JourneyApplication";
+import Applicants from "./pages/jobs/Job Admin/Applicants";
+import MyVacancy from "./pages/jobs/Job Admin/MyVacancy";
 
 export {
   Navbar,
@@ -36,4 +38,6 @@ export {
   MyApplication,
   MyInformation,
   JourneyApplication,
+  Applicants,
+  MyVacancy,
 };
