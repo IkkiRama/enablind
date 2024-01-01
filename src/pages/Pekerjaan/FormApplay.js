@@ -1,7 +1,6 @@
 import {
   Text,
   View,
-  Image,
   StatusBar,
   Pressable,
   ScrollView,
@@ -12,13 +11,13 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import { getAuth } from "firebase/auth";
-import { ref, push, onValue } from "firebase/database";
+import { ref, push, onValue, update } from "firebase/database";
 
 import { db } from "../../configs/firebase";
 import { Navbar } from "../../components";
 import { COLORS, SAFEAREAVIEW, SHADOWS } from "../../constants";
 const FormApplay = ({ navigation, route }) => {
-  const { id } = route.params;
+  const { id, jumlahPelamar } = route.params;
   const auth = getAuth();
   let userLogin;
   const [dataUser, setDataUser] = useState({});
@@ -102,7 +101,12 @@ const FormApplay = ({ navigation, route }) => {
           cleanedExperienceArray === undefined ? "" : cleanedExperienceArray,
       };
 
+      const updateJumlahPelamar = { "Jumlah Pelamar": jumlahPelamar + 1 };
+
       push(ref(db, "Lamaran Kerja"), storeData);
+      update(ref(db, "Pekerjaan"), {
+        [id]: updateJumlahPelamar,
+      });
       reset();
       Alert.alert("You have successfully registered!");
       return navigation.replace("Pekerjaan");

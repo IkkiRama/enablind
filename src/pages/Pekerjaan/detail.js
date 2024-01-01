@@ -90,7 +90,12 @@ const DetailJob = ({ route, navigation }) => {
       <View style={styles.buttonContainer}>
         <Pressable
           style={styles.buttonApply}
-          onPress={() => navigation.navigate("FormApplay", { id })}
+          onPress={() =>
+            navigation.navigate("FormApplay", {
+              id,
+              jumlahPelamar: data["Jumlah Pelamar"],
+            })
+          }
         >
           <Text style={styles.buttonApplyText}>APPLY NOW</Text>
         </Pressable>

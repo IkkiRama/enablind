@@ -11,7 +11,7 @@ Ketika Lamar pekerjaan, jumlah Pelamar++
 
 
 
-
+Ketika update jumlah pelamar, maka yang di updtae semua data pekerjaan dengan id yang sama, bukan hanya update jumlah pelamarnya
 
 
 

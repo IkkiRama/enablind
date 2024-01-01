@@ -65,7 +65,7 @@ const DetailLamaran = ({ navigation, route }) => {
             </View>
           </View>
 
-          <View style={styles.tabContainer}>
+          {/* <View style={styles.tabContainer}>
             {tabs.map((tab, i) => (
               <Pressable
                 key={i}
@@ -75,7 +75,7 @@ const DetailLamaran = ({ navigation, route }) => {
                 <Text style={styles.tabText}>{tab}</Text>
               </Pressable>
             ))}
-          </View>
+          </View> */}
 
           <View style={styles.displayTabContentContainer}>
             <View style={styles.displayTabContent}>{displayTabContent()}</View>
@@ -101,26 +101,27 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   imageJobContainer: {
-    width: "25%",
+    width: "20%",
+    marginRight: 15,
   },
   imageJob: {
     width: 70,
     height: 70,
   },
   jobInformation: {
-    width: "75%",
+    width: "80%",
   },
   jobTitle: {
-    fontSize: 18,
-    lineHeight: 23,
-    fontWeight: "600",
+    fontSize: 20,
+    lineHeight: 27,
+    fontWeight: "700",
   },
   company: {
     fontSize: 16,
     marginBottom: 10,
   },
   statusApplication: {
-    fontSize: 16,
+    fontSize: 17,
   },
 
   tabContainer: { marginBottom: 20, flexDirection: "row" },
@@ -137,10 +138,6 @@ const styles = StyleSheet.create({
   tabText: {
     fontSize: 15,
     fontWeight: "500",
-  },
-
-  displayTabContentContainer: {
-    paddingHorizontal: 10,
   },
 
   displayTabContent: {
