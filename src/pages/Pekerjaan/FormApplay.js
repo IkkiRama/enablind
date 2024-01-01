@@ -17,7 +17,7 @@ import { db } from "../../configs/firebase";
 import { Navbar } from "../../components";
 import { COLORS, SAFEAREAVIEW, SHADOWS } from "../../constants";
 const FormApplay = ({ navigation, route }) => {
-  const { id, jumlahPelamar } = route.params;
+  const { id, data } = route.params;
   const auth = getAuth();
   let userLogin;
   const [dataUser, setDataUser] = useState({});
@@ -101,11 +101,22 @@ const FormApplay = ({ navigation, route }) => {
           cleanedExperienceArray === undefined ? "" : cleanedExperienceArray,
       };
 
-      const updateJumlahPelamar = { "Jumlah Pelamar": jumlahPelamar + 1 };
+      const updateDataPekerjaan = {
+        Company: data["Company"],
+        "Image Company": data["Image Company"],
+        "Job Description": data["Job Description"],
+        "Job Location": data["Job Location"],
+        "Job Publish Date": data["Job Publish Date"],
+        "Job Qualifications": data["Job Qualifications"],
+        "Job Salary": data["Job Salary"],
+        "Job Title": data["Job Title"],
+        "Type Job": data["Type Job"],
+        "Jumlah Pelamar": data["Jumlah Pelamar"] + 1,
+      };
 
       push(ref(db, "Lamaran Kerja"), storeData);
       update(ref(db, "Pekerjaan"), {
-        [id]: updateJumlahPelamar,
+        [id]: updateDataPekerjaan,
       });
       reset();
       Alert.alert("You have successfully registered!");

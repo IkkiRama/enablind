@@ -16,6 +16,7 @@ import {
   Qualifications,
   OtherInfo,
 } from "../../components";
+
 import { COLORS, SAFEAREAVIEW, SHADOWS } from "../../constants";
 const DetailJob = ({ route, navigation }) => {
   const { data, id } = route.params;
@@ -93,7 +94,7 @@ const DetailJob = ({ route, navigation }) => {
           onPress={() =>
             navigation.navigate("FormApplay", {
               id,
-              jumlahPelamar: data["Jumlah Pelamar"],
+              data,
             })
           }
         >

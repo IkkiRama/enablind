@@ -1,25 +1,8 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  Image,
-  SafeAreaView,
-  TouchableOpacity,
-  StatusBar,
-  Alert,
-  KeyboardAvoidingView,
-} from "react-native";
+import { StyleSheet, Text, View, Alert } from "react-native";
 
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { ref, push, onValue } from "firebase/database";
+import { ref, onValue } from "firebase/database";
 
 import { db } from "../../../../configs/firebase";
 import LamaranCard from "../../../common/card/lamaranCard";
