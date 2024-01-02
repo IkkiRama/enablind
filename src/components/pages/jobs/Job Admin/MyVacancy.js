@@ -29,28 +29,25 @@ const MyVacancy = ({ navigation }) => {
 
   dataUserKeys.map((key) => {
     if (dataUser[key].email === auth.currentUser.email) {
-      userLogin = key;
+      userLogin = dataUser[key];
     }
   });
 
-  const renderPekerjaan = () => {
-    console.log("=====================================================");
+  const renderPekerjaan = () =>
     Object.keys(dataPekerjaan).map((id_pekerjaan) => {
-      if (dataPekerjaan[id_pekerjaan]["Id User"] == userLogin) {
-        console.log(
-          `Id pekerjaan : ${id_pekerjaan} dengan nama job ${dataPekerjaan[id_pekerjaan]["Job Title"]}`
-        );
+      if (dataPekerjaan[id_pekerjaan]["email"] === userLogin.email) {
         return (
           <JobCard
             navigation={navigation}
             data={dataPekerjaan[id_pekerjaan]}
             key={id_pekerjaan}
             id={id_pekerjaan}
+            isCompany={true}
           ></JobCard>
         );
       }
     });
-  };
+
   return (
     <>
       {Object.keys(dataPekerjaan).length > 0 ? (

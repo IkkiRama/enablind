@@ -19,8 +19,10 @@ import {
 
 import { COLORS, SAFEAREAVIEW, SHADOWS } from "../../constants";
 const DetailJob = ({ route, navigation }) => {
-  const { data, id } = route.params;
-  const tabs = ["Descriptions", "Qualifications", "Other info"];
+  const { data, id, isCompany } = route.params;
+  const tabs = isCompany
+    ? ["Detail", "Applicants"]
+    : ["Descriptions", "Qualifications", "Other info"];
   const [activeTab, setActiveTab] = useState(tabs[0]);
   const otherInfo = {
     "Job Salary": data["Job Salary"],
@@ -29,28 +31,52 @@ const DetailJob = ({ route, navigation }) => {
   };
 
   const displayTabContent = () => {
-    switch (activeTab) {
-      case "Qualifications":
-        return (
-          <Qualifications
-            title="Qualification"
-            data={data["Job Qualifications"] ?? ["N/A"]}
-          />
-        );
-      case "Descriptions":
-        return (
-          <JobDescriptions
-            title="Job Description"
-            data={data["Job Description"] ?? ["Job has no description"]}
-          />
-        );
-      case "Other info":
-        return (
-          <OtherInfo
-            title="Other info"
-            data={Object.entries(otherInfo) ?? ["N/A"]}
-          />
-        );
+    if (isCompany) {
+      switch (activeTab) {
+        case "Detail":
+          return (
+            <>
+              <JobDescriptions
+                title="Job Description"
+                data={data["Job Description"] ?? ["Job has no description"]}
+              />
+              <Qualifications
+                title="Qualification"
+                data={data["Job Qualifications"] ?? ["N/A"]}
+              />
+              <OtherInfo
+                title="Other info"
+                data={Object.entries(otherInfo) ?? ["N/A"]}
+              />
+            </>
+          );
+        case "Applicants":
+          return <Text>ASU</Text>;
+      }
+    } else {
+      switch (activeTab) {
+        case "Qualifications":
+          return (
+            <Qualifications
+              title="Qualification"
+              data={data["Job Qualifications"] ?? ["N/A"]}
+            />
+          );
+        case "Descriptions":
+          return (
+            <JobDescriptions
+              title="Job Description"
+              data={data["Job Description"] ?? ["Job has no description"]}
+            />
+          );
+        case "Other info":
+          return (
+            <OtherInfo
+              title="Other info"
+              data={Object.entries(otherInfo) ?? ["N/A"]}
+            />
+          );
+      }
     }
   };
 
@@ -89,17 +115,21 @@ const DetailJob = ({ route, navigation }) => {
         </View>
       </ScrollView>
       <View style={styles.buttonContainer}>
-        <Pressable
-          style={styles.buttonApply}
-          onPress={() =>
-            navigation.navigate("FormApplay", {
-              id,
-              data,
-            })
-          }
-        >
-          <Text style={styles.buttonApplyText}>APPLY NOW</Text>
-        </Pressable>
+        {!isCompany ? (
+          <Pressable
+            style={styles.buttonApply}
+            onPress={() =>
+              navigation.navigate("FormApplay", {
+                id,
+                data,
+              })
+            }
+          >
+            <Text style={styles.buttonApplyText}>APPLY NOW</Text>
+          </Pressable>
+        ) : (
+          ""
+        )}
       </View>
     </SafeAreaView>
   );
@@ -115,10 +145,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: COLORS.lightWhite,
+    borderRadius: 20,
   },
   buttonApply: {
     padding: 17,
-    borderRadius: 20,
     backgroundColor: COLORS.primary,
     justifyContent: "center",
     alignItems: "center",

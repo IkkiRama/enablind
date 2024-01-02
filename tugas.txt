@@ -1,3 +1,13 @@
+
+
+Ubah ketika mau query ke pekerjaan, filter dengan session email user yang login
+
+
+Notif
+add email & id pekerjaan
+
+
+
 sesuaikan faq
 Tambahkan aksesbilitas
 

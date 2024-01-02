@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { styles } from "./style";
+import numberFormat from "../../../../utils/numberFormat";
 
 const OtherInfo = ({ title, data }) => {
   return (
@@ -9,7 +10,10 @@ const OtherInfo = ({ title, data }) => {
       <View style={styles.contentBox}>
         {data.map((perData, i) => (
           <Text key={i} style={styles.contextText}>
-            {perData[0]} : {perData[1]}
+            {perData[0]} :{" "}
+            {perData[0] === "Job Salary"
+              ? numberFormat(perData[1])
+              : perData[1]}
           </Text>
         ))}
       </View>
