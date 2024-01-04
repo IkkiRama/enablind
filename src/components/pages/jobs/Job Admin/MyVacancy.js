@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import { db } from "../../../../configs/firebase";
 import JobCard from "../../../common/card/jobCard";
-import { getAuth, signOut } from "firebase/auth";
-import CekAuth from "../../../common/CekAuth";
+import { getAuth } from "firebase/auth";
 
 const MyVacancy = ({ navigation }) => {
   const auth = getAuth();

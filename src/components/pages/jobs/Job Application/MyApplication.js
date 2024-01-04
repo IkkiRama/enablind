@@ -15,7 +15,6 @@ const MyApplication = ({ navigation }) => {
   const [dataPekerjaan, setDataPekerjaan] = useState([]);
 
   const dataLamaranKeys = Object.keys(dataLamaran);
-  const dataPekerjaanKeys = Object.keys(dataPekerjaan);
 
   useEffect(() => {
     if (auth.currentUser == null) {
@@ -28,19 +27,6 @@ const MyApplication = ({ navigation }) => {
         setDataLamaran(dataLamaranDB);
       });
 
-      onValue(ref(db, "Pekerjaan"), (querySnapShot) => {
-        let data = querySnapShot.val() || {};
-        let dataPekerjaan = { ...data };
-        setDataPekerjaan(dataPekerjaan);
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    if (auth.currentUser == null) {
-      Alert.alert("You are not logged in yet, please login first");
-      return navigation.replace("Login");
-    } else {
       onValue(ref(db, "Pekerjaan"), (querySnapShot) => {
         let data = querySnapShot.val() || {};
         let dataPekerjaan = { ...data };
@@ -73,7 +59,7 @@ const MyApplication = ({ navigation }) => {
         renderLamaran()
       ) : (
         <View style={styles.noJobContainer}>
-          <Text style={styles.noJobText}>No Job Available</Text>
+          <Text style={styles.noJobText}>No applications you have</Text>
         </View>
       )}
     </>

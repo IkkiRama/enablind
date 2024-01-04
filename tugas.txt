@@ -1,4 +1,19 @@
 
+Company
+Image Company
+Job Description
+Job Location
+Job Publish Date
+Job Qualifications
+Job Salary
+Job Title
+Jumlah Pelamar
+Type Job
+email
+
+
+
+
 
 Ubah ketika mau query ke pekerjaan, filter dengan session email user yang login
 

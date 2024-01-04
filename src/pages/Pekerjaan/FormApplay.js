@@ -9,8 +9,8 @@ import {
   TextInput,
   Alert,
 } from "react-native";
-import { useState, useEffect } from "react";
 import { getAuth } from "firebase/auth";
+import { useState, useEffect } from "react";
 import { ref, push, onValue, update } from "firebase/database";
 
 import { db } from "../../configs/firebase";
@@ -112,6 +112,7 @@ const FormApplay = ({ navigation, route }) => {
         "Job Title": data["Job Title"],
         "Type Job": data["Type Job"],
         "Jumlah Pelamar": data["Jumlah Pelamar"] + 1,
+        email: data["email"],
       };
 
       push(ref(db, "Lamaran Kerja"), storeData);

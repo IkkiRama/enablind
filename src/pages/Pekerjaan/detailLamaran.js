@@ -3,16 +3,19 @@ import {
   View,
   Image,
   StatusBar,
-  Pressable,
   ScrollView,
   StyleSheet,
   SafeAreaView,
+  Dimensions,
 } from "react-native";
 import { useState } from "react";
-import { JourneyApplication, MyInformation, Navbar } from "../../components";
+import { FontAwesome5 } from "@expo/vector-icons";
+
 import { COLORS, SAFEAREAVIEW } from "../../constants";
+import { JourneyApplication, MyInformation, Navbar } from "../../components";
 
 const DetailLamaran = ({ navigation, route }) => {
+  const height = Dimensions.get("window").height;
   const { dataLamaran, dataPekerjaan, id } = route.params;
 
   const tabs = ["My Information", "Journey Application"];
@@ -48,7 +51,7 @@ const DetailLamaran = ({ navigation, route }) => {
           backgroundColor="transparent"
         ></StatusBar>
 
-        <View style={styles.mainWrapper}>
+        <View style={styles.mainWrapper(height)}>
           <View style={styles.jobInformationWrapper}>
             <View style={styles.imageJobContainer}>
               <Image
@@ -82,6 +85,16 @@ const DetailLamaran = ({ navigation, route }) => {
           </View>
         </View>
       </ScrollView>
+
+      <View style={styles.buttonContainer}>
+        <View style={styles.buttonReject}>
+          <FontAwesome5 name="trash" size={24} color={COLORS.lightWhite} />
+        </View>
+
+        <View style={styles.buttonProses}>
+          <Text style={styles.buttonProsesText}>CALL FOR INTERVIEW</Text>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -89,11 +102,12 @@ const DetailLamaran = ({ navigation, route }) => {
 export default DetailLamaran;
 
 const styles = StyleSheet.create({
-  mainWrapper: {
+  mainWrapper: (height) => ({
+    minHeight: height,
     paddingVertical: 20,
     paddingHorizontal: 10,
     backgroundColor: COLORS.lightWhite,
-  },
+  }),
 
   jobInformationWrapper: {
     flexDirection: "row",
@@ -144,5 +158,36 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     backgroundColor: COLORS.white,
+  },
+
+  buttonContainer: {
+    padding: 10,
+    elevation: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: COLORS.lightWhite,
+  },
+  buttonReject: {
+    height: 60,
+    paddingHorizontal: 20,
+    backgroundColor: COLORS.diskon,
+    borderRadius: 10,
+    marginRight: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buttonProses: {
+    flex: 1,
+    height: 60,
+    borderRadius: 10,
+    alignItems: "center",
+    paddingHorizontal: 20,
+    justifyContent: "center",
+    backgroundColor: COLORS.primary,
+  },
+
+  buttonProsesText: {
+    fontSize: 16,
+    fontWeight: "700",
   },
 });
