@@ -14,7 +14,7 @@ import {
 import React, { useState } from "react";
 
 import { COLORS, SAFEAREAVIEW, SHADOWS } from "../../constants";
-import { Navbar, BottomMenu } from "../../components";
+import { Navbar, BottomMenu, CekAuth } from "../../components";
 
 const TentangAplikasi = ({ navigation }) => {
   return (
@@ -53,7 +53,11 @@ const TentangAplikasi = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <BottomMenu focused="Profile" navigationHandle={navigation} />
+      <BottomMenu
+        focused="Profile"
+        navigationHandle={navigation}
+        userLogin={CekAuth()}
+      />
     </SafeAreaView>
   );
 };
@@ -80,7 +84,7 @@ const styles = StyleSheet.create({
   },
   imageTentangAplikasi: {
     width: 200,
-    height: 170,
+    height: 200,
     borderRadius: 20,
   },
   filosofiAplikasi: {

@@ -16,7 +16,7 @@ import { FontAwesome5, FontAwesome, Feather } from "@expo/vector-icons";
 
 import { db } from "../../configs/firebase";
 import { COLORS, SAFEAREAVIEW } from "../../constants";
-import { Navbar, BottomMenu } from "../../components";
+import { Navbar, BottomMenu, CekAuth } from "../../components";
 
 const Bantuan = ({ navigation }) => {
   const auth = getAuth();
@@ -190,7 +190,11 @@ const Bantuan = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <BottomMenu focused="Profile" navigationHandle={navigation} />
+      <BottomMenu
+        focused="Profile"
+        navigationHandle={navigation}
+        userLogin={CekAuth()}
+      />
     </SafeAreaView>
   );
 };

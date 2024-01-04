@@ -19,6 +19,7 @@ import {
   BottomMenu,
   RekomendasiArtikel,
   ArtikelCard,
+  CekAuth,
 } from "../../components";
 import { COLORS, SAFEAREAVIEW, images } from "../../constants";
 
@@ -167,7 +168,11 @@ const DetailArtikel = ({ route, navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <BottomMenu focused="Artikel" navigationHandle={navigation}></BottomMenu>
+      <BottomMenu
+        focused="Artikel"
+        navigationHandle={navigation}
+        userLogin={CekAuth()}
+      ></BottomMenu>
     </SafeAreaView>
   );
 };

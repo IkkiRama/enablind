@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "90%",
+    borderRadius: 10,
   },
 
   buttonApplyText: {

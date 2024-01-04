@@ -19,6 +19,7 @@ import {
   BottomMenu,
   ArtikelCard,
   RekomendasiArtikel,
+  CekAuth,
 } from "../../components";
 import { db } from "../../configs/firebase";
 import { COLORS, SAFEAREAVIEW, images } from "../../constants";
@@ -151,7 +152,11 @@ const Artikel = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <BottomMenu focused="Artikel" navigationHandle={navigation}></BottomMenu>
+      <BottomMenu
+        focused="Artikel"
+        navigationHandle={navigation}
+        userLogin={CekAuth()}
+      ></BottomMenu>
     </SafeAreaView>
   );
 };

@@ -7,34 +7,9 @@ import {
   View,
 } from "react-native";
 import { MaterialIcons, Foundation, Ionicons } from "@expo/vector-icons";
-import { useState, useEffect } from "react";
-import { getAuth } from "firebase/auth";
-import { ref, push, onValue, update } from "firebase/database";
-
-import { db } from "../../configs/firebase";
 import { COLORS, SHADOWS } from "../../constants";
-const BottomMenu = ({ focused, navigationHandle }) => {
-  const auth = getAuth();
-  let userLogin;
-  const [dataUser, setDataUser] = useState({});
-  const dataUserKeys = Object.keys(dataUser);
 
-  useEffect(() => {
-    if (auth.currentUser != null) {
-      return onValue(ref(db, "User"), (querySnapShot) => {
-        let data = querySnapShot.val() || {};
-        let dataUser = { ...data };
-        setDataUser(dataUser);
-      });
-    }
-  }, []);
-
-  dataUserKeys.map((key) => {
-    if (dataUser[key].email === auth.currentUser.email) {
-      JSON.stringify((userLogin = dataUser[key]));
-    }
-  });
-
+const BottomMenu = ({ focused, navigationHandle, userLogin }) => {
   return (
     <View style={styles.menuWraper}>
       <TouchableOpacity
@@ -57,22 +32,17 @@ const BottomMenu = ({ focused, navigationHandle }) => {
           Home
         </Text>
       </TouchableOpacity>
+      {userLogin?.role === "company" ? (
+        <TouchableOpacity
+          style={styles.menuButton(userLogin?.role)}
+          onPress={() => navigationHandle.navigate("CompanyVacancy")}
+        >
+          <MaterialIcons
+            name="work"
+            size={24}
+            color={focused === "Pekerjaan" ? COLORS.primary : COLORS.gray}
+          />
 
-      <TouchableOpacity
-        style={styles.menuButton(userLogin?.role)}
-        onPress={() =>
-          navigationHandle.navigate(
-            userLogin?.role === "company" ? "CompanyVacancy" : "Pekerjaan"
-          )
-        }
-      >
-        <MaterialIcons
-          name="work"
-          size={24}
-          color={focused === "Pekerjaan" ? COLORS.primary : COLORS.gray}
-        />
-
-        {userLogin?.role === "company" ? (
           <Text
             style={[
               styles.menuTextButton,
@@ -83,7 +53,17 @@ const BottomMenu = ({ focused, navigationHandle }) => {
           >
             Vacancy
           </Text>
-        ) : (
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={styles.menuButton(userLogin?.role)}
+          onPress={() => navigationHandle.navigate("Pekerjaan")}
+        >
+          <MaterialIcons
+            name="work"
+            size={24}
+            color={focused === "Pekerjaan" ? COLORS.primary : COLORS.gray}
+          />
           <Text
             style={[
               styles.menuTextButton,
@@ -94,8 +74,8 @@ const BottomMenu = ({ focused, navigationHandle }) => {
           >
             Jobs
           </Text>
-        )}
-      </TouchableOpacity>
+        </TouchableOpacity>
+      )}
 
       {userLogin?.role === "company" ? (
         <TouchableOpacity

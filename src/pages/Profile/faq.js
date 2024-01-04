@@ -12,7 +12,7 @@ import { ref, onValue } from "firebase/database";
 
 import { db } from "../../configs/firebase";
 import { COLORS, SAFEAREAVIEW } from "../../constants";
-import { Navbar, BottomMenu, AccordionItem } from "../../components";
+import { Navbar, BottomMenu, AccordionItem, CekAuth } from "../../components";
 
 const FAQ = ({ navigation }) => {
   const [dataFAQ, setDataFAQ] = useState({});
@@ -54,7 +54,11 @@ const FAQ = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <BottomMenu focused="Profile" navigationHandle={navigation} />
+      <BottomMenu
+        focused="Profile"
+        navigationHandle={navigation}
+        userLogin={CekAuth()}
+      />
     </SafeAreaView>
   );
 };

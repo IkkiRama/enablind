@@ -16,61 +16,22 @@ import {
   Octicons,
   Entypo,
 } from "@expo/vector-icons";
-import { ref, onValue } from "firebase/database";
 import { getAuth, signOut } from "firebase/auth";
 
-import { db } from "../../configs/firebase";
-import { BottomMenu, Navbar } from "../../components";
+import { BottomMenu, CekAuth, Navbar } from "../../components";
 import { COLORS, SAFEAREAVIEW } from "../../constants";
 
 const Profile = ({ navigation }) => {
   const auth = getAuth();
-  let userLogin;
-  const [dataUser, setDataUser] = useState({});
-  const dataUserKeys = Object.keys(dataUser);
 
   useEffect(() => {
     if (auth.currentUser == null) {
       Alert.alert("You are not logged in yet, please login first");
       return navigation.replace("Login");
-    } else {
-      return onValue(ref(db, "User"), (querySnapShot) => {
-        let data = querySnapShot.val() || {};
-        let dataUser = { ...data };
-        setDataUser(dataUser);
-      });
     }
   }, []);
 
-  dataUserKeys.map((key) => {
-    if (dataUser[key].email === auth.currentUser.email) {
-      JSON.stringify((userLogin = dataUser[key]));
-    }
-  });
-
-  const handleLogout = () => {
-    Alert.alert(
-      "Are you sure?",
-      "Are you sure you're going to exit the account?",
-      [
-        // The "Yes" button
-        {
-          text: "Yes",
-          onPress: () => {
-            signOut(auth);
-            navigation.replace("Login");
-            Alert.alert("You are successfully logged out");
-          },
-        },
-        // The "No" button
-        // Does nothing but dismiss the dialog when tapped
-        {
-          text: "No",
-        },
-      ]
-    );
-  };
-  return (
+  const RenderElement = (userLogin) => (
     <SafeAreaView style={SAFEAREAVIEW.style}>
       <Navbar />
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -136,9 +97,38 @@ const Profile = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <BottomMenu focused="Profile" navigationHandle={navigation} />
+      <BottomMenu
+        focused="Profile"
+        navigationHandle={navigation}
+        userLogin={CekAuth()}
+      />
     </SafeAreaView>
   );
+
+  const handleLogout = () => {
+    Alert.alert(
+      "Are you sure?",
+      "Are you sure you're going to exit the account?",
+      [
+        // The "Yes" button
+        {
+          text: "Yes",
+          onPress: () => {
+            signOut(auth);
+            navigation.replace("Login");
+            Alert.alert("You are successfully logged out");
+          },
+        },
+        // The "No" button
+        // Does nothing but dismiss the dialog when tapped
+        {
+          text: "No",
+        },
+      ]
+    );
+  };
+
+  return RenderElement(CekAuth());
 };
 
 export default Profile;

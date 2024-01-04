@@ -9,7 +9,13 @@ import {
   Dimensions,
 } from "react-native";
 import React, { useState } from "react";
-import { Applicants, BottomMenu, MyVacancy, Navbar } from "../../components";
+import {
+  Applicants,
+  BottomMenu,
+  CekAuth,
+  MyVacancy,
+  Navbar,
+} from "../../components";
 import { COLORS, SAFEAREAVIEW } from "../../constants";
 
 const CompanyVacancy = ({ navigation }) => {
@@ -59,7 +65,11 @@ const CompanyVacancy = ({ navigation }) => {
           {displayTabContent()}
         </View>
       </ScrollView>
-      <BottomMenu focused="Pekerjaan" navigationHandle={navigation} />
+      <BottomMenu
+        focused="Pekerjaan"
+        navigationHandle={navigation}
+        userLogin={CekAuth()}
+      />
     </SafeAreaView>
   );
 };

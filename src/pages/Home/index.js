@@ -10,7 +10,13 @@ import { getAuth } from "firebase/auth";
 import { ref, onValue } from "firebase/database";
 import { db } from "../../configs/firebase";
 
-import { BottomMenu, Navbar, PopularJobs, HomeArtikel } from "../../components";
+import {
+  BottomMenu,
+  Navbar,
+  PopularJobs,
+  HomeArtikel,
+  CekAuth,
+} from "../../components";
 import { COLORS, SAFEAREAVIEW, SIZES } from "../../constants";
 
 const Home = ({ navigation }) => {
@@ -63,7 +69,11 @@ const Home = ({ navigation }) => {
           <PopularJobs navigation={navigation}></PopularJobs>
         </View>
       </ScrollView>
-      <BottomMenu focused="Beranda" navigationHandle={navigation} />
+      <BottomMenu
+        focused="Beranda"
+        navigationHandle={navigation}
+        userLogin={CekAuth()}
+      />
     </SafeAreaView>
   );
 };

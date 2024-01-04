@@ -18,6 +18,7 @@ import MyInformation from "./pages/jobs/Detaill Application/MyInformation";
 import JourneyApplication from "./pages/jobs/Detaill Application/JourneyApplication";
 import Applicants from "./pages/jobs/Job Admin/Applicants";
 import MyVacancy from "./pages/jobs/Job Admin/MyVacancy";
+import CekAuth from "./common/CekAuth";
 
 export {
   Navbar,
@@ -40,4 +41,5 @@ export {
   JourneyApplication,
   Applicants,
   MyVacancy,
+  CekAuth,
 };

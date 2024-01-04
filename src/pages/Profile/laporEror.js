@@ -15,35 +15,29 @@ import { getAuth } from "firebase/auth";
 import { ref, push, onValue } from "firebase/database";
 
 import { COLORS, SAFEAREAVIEW } from "../../constants";
-import { Navbar, BottomMenu } from "../../components";
+import { Navbar, BottomMenu, CekAuth } from "../../components";
 import { db } from "../../configs/firebase";
 
 const LaporEror = ({ navigation }) => {
-  let userLogin;
   const auth = getAuth();
-  const [judul, setJudul] = useState("");
-  const [message, setMessage] = useState("");
-  const [dataUser, setDataUser] = useState({});
-  const dataUserKeys = Object.keys(dataUser);
-
   useEffect(() => {
     if (auth.currentUser == null) {
       Alert.alert("You are not logged in yet, please login first");
       return navigation.replace("Login");
-    } else {
-      return onValue(ref(db, "User"), (querySnapShot) => {
-        let data = querySnapShot.val() || {};
-        let dataUser = { ...data };
-        setDataUser(dataUser);
-      });
     }
   }, []);
 
-  dataUserKeys.map((key) => {
-    if (dataUser[key].email === auth.currentUser.email) {
-      JSON.stringify((userLogin = dataUser[key]));
-    }
-  });
+  return (
+    <RenderElement
+      navigation={navigation}
+      userLogin={CekAuth()}
+    ></RenderElement>
+  );
+};
+
+const RenderElement = ({ userLogin, navigation }) => {
+  const [judul, setJudul] = useState("");
+  const [message, setMessage] = useState("");
 
   const resetData = () => {
     setJudul("");
@@ -68,6 +62,7 @@ const LaporEror = ({ navigation }) => {
       navigation.replace("Profile");
     }
   };
+
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
       <Navbar
@@ -120,7 +115,11 @@ const LaporEror = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <BottomMenu focused="Profile" navigationHandle={navigation} />
+      <BottomMenu
+        focused="Profile"
+        navigationHandle={navigation}
+        userLogin={CekAuth()}
+      />
     </SafeAreaView>
   );
 };
