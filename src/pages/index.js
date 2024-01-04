@@ -13,6 +13,8 @@ import DetailJob from "./Pekerjaan/detail";
 import FormApplay from "./Pekerjaan/FormApplay";
 import DetailLamaran from "./Pekerjaan/detailLamaran";
 import CompanyVacancy from "./Pekerjaan/CompanyVacancy";
+import FormInterview from "./Pekerjaan/FormInterview";
+import AddVacancy from "./Pekerjaan/AddVacancy";
 
 export {
   Home,
@@ -30,4 +32,6 @@ export {
   FormApplay,
   DetailLamaran,
   CompanyVacancy,
+  FormInterview,
+  AddVacancy,
 };

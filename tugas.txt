@@ -13,6 +13,18 @@ email
 
 
 
+Status Lamaran
+education
+email
+experience
+houseAddress
+id_pekerjaan
+nama
+phoneHumber
+summary
+
+
+
 
 
 Ubah ketika mau query ke pekerjaan, filter dengan session email user yang login

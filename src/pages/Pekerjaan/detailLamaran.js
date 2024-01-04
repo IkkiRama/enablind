@@ -7,14 +7,25 @@ import {
   StyleSheet,
   SafeAreaView,
   Dimensions,
+  Pressable,
+  Alert,
 } from "react-native";
 import { useState } from "react";
+import { getAuth } from "firebase/auth";
+import { ref, update } from "firebase/database";
 import { FontAwesome5 } from "@expo/vector-icons";
 
+import { db } from "../../configs/firebase";
 import { COLORS, SAFEAREAVIEW } from "../../constants";
-import { JourneyApplication, MyInformation, Navbar } from "../../components";
+import {
+  CekAuth,
+  JourneyApplication,
+  MyInformation,
+  Navbar,
+} from "../../components";
 
 const DetailLamaran = ({ navigation, route }) => {
+  const auth = getAuth();
   const height = Dimensions.get("window").height;
   const { dataLamaran, dataPekerjaan, id } = route.params;
 
@@ -37,38 +48,154 @@ const DetailLamaran = ({ navigation, route }) => {
     }
   };
 
-  return (
-    <SafeAreaView style={SAFEAREAVIEW.style}>
-      <Navbar
-        isBack={true}
-        goBack={() => navigation.goBack()}
-        isTitle="Detail Application"
-      ></Navbar>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <StatusBar
-          translucent
-          barStyle={"light-content"}
-          backgroundColor="transparent"
-        ></StatusBar>
+  const RejectApplication = () => {
+    if (dataLamaran["Status Lamaran"].status === "Rejected") {
+      Alert.alert("You've already rejected this job application!");
+    } else {
+      Alert.alert(
+        "Are you sure?",
+        "Are you sure you will reject this job application?",
+        [
+          // The "Yes" button
+          {
+            text: "Yes",
+            onPress: () => {
+              const DataUpdated = {
+                "Status Lamaran": {
+                  status: "Rejected",
+                  tempat: "",
+                },
+                education: dataLamaran["education"],
+                email: dataLamaran["email"],
+                experience: dataLamaran["experience"],
+                houseAddress: dataLamaran["houseAddress"],
+                id_pekerjaan: dataLamaran["id_pekerjaan"],
+                nama: dataLamaran["nama"],
+                phoneHumber: dataLamaran["phoneHumber"],
+                summary: dataLamaran["summary"],
+              };
 
-        <View style={styles.mainWrapper(height)}>
-          <View style={styles.jobInformationWrapper}>
-            <View style={styles.imageJobContainer}>
-              <Image
-                style={styles.imageJob}
-                source={{ uri: dataPekerjaan["Image Company"] }}
-              ></Image>
-            </View>
-            <View style={styles.jobInformation}>
-              <Text style={styles.jobTitle}>{dataPekerjaan["Job Title"]}</Text>
-              <Text style={styles.company}>{dataPekerjaan["Company"]}</Text>
-              <Text style={styles.statusApplication}>
-                Status : {dataLamaran["Status Lamaran"].status}
-              </Text>
-            </View>
-          </View>
+              update(ref(db, "Lamaran Kerja"), {
+                [id]: DataUpdated,
+              });
 
-          {/* <View style={styles.tabContainer}>
+              Alert.alert(
+                "You have successfully rejected this job application!"
+              );
+              navigation.replace("CompanyVacancy");
+            },
+          },
+          // The "No" button
+          // Does nothing but dismiss the dialog when tapped
+          {
+            text: "No",
+          },
+        ]
+      );
+    }
+  };
+
+  const UpdateStatusLamaran = () => {
+    if (dataLamaran["Status Lamaran"].status === "Pending for Interview") {
+      return navigation.navigate("Form Interview", {
+        dataLamaran,
+        dataPekerjaan,
+        id,
+      });
+    } else if (
+      dataLamaran["Status Lamaran"].status === "Invited to Interview"
+    ) {
+      Alert.alert(
+        "Are you sure?",
+        "Are you sure you will accept this job application?",
+        [
+          // The "Yes" button
+          {
+            text: "Yes",
+            onPress: () => {
+              const DataUpdated = {
+                "Status Lamaran": {
+                  status: "Job Application Accepted",
+                  tempat: "",
+                },
+                education: dataLamaran["education"],
+                email: dataLamaran["email"],
+                experience: dataLamaran["experience"],
+                houseAddress: dataLamaran["houseAddress"],
+                id_pekerjaan: dataLamaran["id_pekerjaan"],
+                nama: dataLamaran["nama"],
+                phoneHumber: dataLamaran["phoneHumber"],
+                summary: dataLamaran["summary"],
+              };
+
+              update(ref(db, "Lamaran Kerja"), {
+                [id]: DataUpdated,
+              });
+
+              Alert.alert(
+                "You have successfully accepted this job application!"
+              );
+              navigation.replace("CompanyVacancy");
+            },
+          },
+          // The "No" button
+          // Does nothing but dismiss the dialog when tapped
+          {
+            text: "No",
+          },
+        ]
+      );
+    }
+  };
+
+  const RenderElement = (userLogin) => {
+    return (
+      <SafeAreaView style={SAFEAREAVIEW.style}>
+        <Navbar
+          isBack={true}
+          goBack={() => navigation.goBack()}
+          isTitle="Detail Application"
+        ></Navbar>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <StatusBar
+            translucent
+            barStyle={"light-content"}
+            backgroundColor="transparent"
+          ></StatusBar>
+
+          <View style={styles.mainWrapper(height)}>
+            <View style={styles.jobInformationWrapper}>
+              <View style={styles.imageJobContainer}>
+                <Image
+                  style={styles.imageJob}
+                  source={{ uri: dataPekerjaan["Image Company"] }}
+                ></Image>
+              </View>
+              <View style={styles.jobInformation}>
+                <Text style={styles.jobTitle}>
+                  {dataPekerjaan["Job Title"]}
+                </Text>
+                <Text style={styles.company}>{dataPekerjaan["Company"]}</Text>
+                <Text style={styles.statusApplication}>
+                  Status : {dataLamaran["Status Lamaran"].status}
+                </Text>
+
+                {dataLamaran["Status Lamaran"].tempat !== "" ? (
+                  <View style={styles.PlaceForInterview}>
+                    <Text style={styles.statusApplication}>
+                      Place for Interview
+                    </Text>
+                    <Text style={styles.interviewApplication}>
+                      {dataLamaran["Status Lamaran"].tempat}
+                    </Text>
+                  </View>
+                ) : (
+                  ""
+                )}
+              </View>
+            </View>
+
+            {/* <View style={styles.tabContainer}>
             {tabs.map((tab, i) => (
               <Pressable
                 key={i}
@@ -80,23 +207,69 @@ const DetailLamaran = ({ navigation, route }) => {
             ))}
           </View> */}
 
-          <View style={styles.displayTabContentContainer}>
-            <View style={styles.displayTabContent}>{displayTabContent()}</View>
+            <View style={styles.displayTabContentContainer}>
+              <View style={styles.displayTabContent}>
+                {displayTabContent()}
+              </View>
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
 
-      <View style={styles.buttonContainer}>
-        <View style={styles.buttonReject}>
-          <FontAwesome5 name="trash" size={24} color={COLORS.lightWhite} />
-        </View>
+        {userLogin?.role === "company" ? (
+          <View style={styles.buttonContainer}>
+            <Pressable
+              onPress={() => RejectApplication()}
+              style={styles.buttonReject}
+            >
+              <FontAwesome5 name="trash" size={24} color={COLORS.lightWhite} />
+            </Pressable>
 
-        <View style={styles.buttonProses}>
-          <Text style={styles.buttonProsesText}>CALL FOR INTERVIEW</Text>
-        </View>
-      </View>
-    </SafeAreaView>
-  );
+            <Pressable
+              disabled={
+                dataLamaran["Status Lamaran"].status === "Rejected"
+                  ? true
+                  : false
+              }
+              onPress={() => UpdateStatusLamaran()}
+              style={styles.buttonProses(dataLamaran["Status Lamaran"].status)}
+            >
+              {dataLamaran["Status Lamaran"].status ===
+              "Pending for Interview" ? (
+                <Text style={styles.buttonProsesText}>CALL FOR INTERVIEW</Text>
+              ) : (
+                ""
+              )}
+              {dataLamaran["Status Lamaran"].status === "Rejected" ? (
+                <Text style={styles.buttonProsesText}>
+                  YOU'VE ALREADY REJECTED
+                </Text>
+              ) : (
+                ""
+              )}
+              {dataLamaran["Status Lamaran"].status ===
+              "Job Application Accepted" ? (
+                <Text style={styles.buttonProsesText}>
+                  YOU'VE ALREADY ACCEPTED
+                </Text>
+              ) : (
+                ""
+              )}
+              {dataLamaran["Status Lamaran"].status ===
+              "Invited to Interview" ? (
+                <Text style={styles.buttonProsesText}>ACCEPT APPLICANTS</Text>
+              ) : (
+                ""
+              )}
+            </Pressable>
+          </View>
+        ) : (
+          ""
+        )}
+      </SafeAreaView>
+    );
+  };
+
+  return RenderElement(CekAuth());
 };
 
 export default DetailLamaran;
@@ -116,7 +289,7 @@ const styles = StyleSheet.create({
   },
   imageJobContainer: {
     width: "20%",
-    marginRight: 15,
+    // marginRight: 15,
   },
   imageJob: {
     width: 70,
@@ -124,6 +297,7 @@ const styles = StyleSheet.create({
   },
   jobInformation: {
     width: "80%",
+    paddingHorizontal: 10,
   },
   jobTitle: {
     fontSize: 20,
@@ -134,8 +308,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 10,
   },
+
+  PlaceForInterview: {
+    marginTop: 10,
+  },
   statusApplication: {
     fontSize: 17,
+  },
+
+  interviewApplication: {
+    marginTop: 5,
+    fontSize: 17,
+    fontWeight: "600",
   },
 
   tabContainer: { marginBottom: 20, flexDirection: "row" },
@@ -176,15 +360,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  buttonProses: {
+  buttonProses: (StatusLamaran) => ({
     flex: 1,
     height: 60,
     borderRadius: 10,
     alignItems: "center",
     paddingHorizontal: 20,
     justifyContent: "center",
-    backgroundColor: COLORS.primary,
-  },
+    backgroundColor:
+      StatusLamaran === "Rejected" ||
+      StatusLamaran === "Job Application Accepted"
+        ? COLORS.gray2
+        : COLORS.primary,
+  }),
 
   buttonProsesText: {
     fontSize: 16,

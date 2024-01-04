@@ -19,7 +19,7 @@ const MyVacancy = ({ navigation }) => {
     }
   }, []);
 
-  const renderPekerjaan = (userLogin) =>
+  const renderPekerjaan = () =>
     Object.keys(dataPekerjaan).map((id_pekerjaan) => {
       if (dataPekerjaan[id_pekerjaan]["email"] === auth.currentUser?.email) {
         return (

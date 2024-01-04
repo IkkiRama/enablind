@@ -1,13 +1,10 @@
+import { getAuth } from "firebase/auth";
 import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
-import { db } from "../../../../configs/firebase";
-import { getAuth } from "firebase/auth";
-import ApplicantCard from "../../../common/card/ApplicantCard";
 
-// ambil semua data pekerjaan, filter uselogin.
-// ambil semua data lamaran,
-// filter apakah lamaran tersebut sesuai dengan id pekerjaan yang company bikin
+import { db } from "../../../../configs/firebase";
+import ApplicantCard from "../../../common/card/ApplicantCard";
 
 const Applicants = ({ navigation }) => {
   const auth = getAuth();

@@ -80,9 +80,13 @@ const BottomMenu = ({ focused, navigationHandle, userLogin }) => {
       {userLogin?.role === "company" ? (
         <TouchableOpacity
           style={[styles.menuButton(userLogin?.role), styles.spesialButton]}
-          onPress={() => navigationHandle.navigate("Artikel")}
+          onPress={() => navigationHandle.navigate("Add Vacancy")}
         >
-          <Ionicons name="add" size={24} style={styles.addLowongan} />
+          <Ionicons
+            name="ios-add-circle-outline"
+            size={24}
+            style={styles.addLowongan(focused)}
+          />
         </TouchableOpacity>
       ) : (
         ""
@@ -143,14 +147,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.lightWhite,
     elevation: 15,
   },
-  spesialButton: {
-    height: (20 / 100) * Dimensions.get("window").width,
-    borderRadius: 50,
-    // transform: [{ translateY: -15 }],
-    backgroundColor: COLORS.primary,
-    paddingVertical: 0,
-    justifyContent: "center",
-  },
+
   menuButton: (role) => ({
     paddingVertical: 10,
     alignItems: "center",
@@ -160,10 +157,10 @@ const styles = StyleSheet.create({
   menuTextButton: {
     fontWeight: "600",
   },
-  addLowongan: {
+  addLowongan: (focused) => ({
     fontSize: 50,
     fontWeight: "600",
-    color: COLORS.font,
-    transform: [{ translateX: 2 }],
-  },
+    color: focused === "Add Vacancy" ? COLORS.primary : COLORS.gray,
+    // transform: [{ translateX: 2 }],
+  }),
 });
