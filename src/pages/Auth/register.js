@@ -60,6 +60,7 @@ const Register = ({ navigation }) => {
             nama,
             email,
             password,
+            role: "user",
           });
           reset();
           Alert.alert("You have successfully registered!");

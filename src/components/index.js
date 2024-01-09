@@ -20,6 +20,7 @@ import Applicants from "./pages/jobs/Job Admin/Applicants";
 import MyVacancy from "./pages/jobs/Job Admin/MyVacancy";
 import CekAuth from "./common/CekAuth";
 import ApplicantCard from "./common/card/ApplicantCard";
+import ApplicantsPerJob from "./pages/jobs/Job Admin/ApplicantsPerJob";
 
 export {
   Navbar,
@@ -44,4 +45,5 @@ export {
   MyVacancy,
   CekAuth,
   ApplicantCard,
+  ApplicantsPerJob,
 };

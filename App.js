@@ -1,5 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { TextInput } from "react-native";
 
 import {
   Home,
@@ -22,6 +23,7 @@ import Register from "./src/pages/Auth/register";
 import TentangAplikasi from "./src/pages/Profile/tentangAplikasi";
 
 const Stack = createNativeStackNavigator();
+// TextInput;
 
 export default function App() {
   return (

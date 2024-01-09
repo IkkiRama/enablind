@@ -4,27 +4,27 @@ import React, { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 
 import { db } from "../../../../configs/firebase";
-import ApplicantCard from "../../../common/card/ApplicantCard";
+import ApplicantsPerJobCard from "../../../common/card/ApplicantsPerJobCard";
 
-const Applicants = ({ navigation }) => {
+const ApplicantsPerJob = ({ data, id, navigation }) => {
   const auth = getAuth();
   const [dataLamaran, setDataLamaran] = useState([]);
-  const [dataPekerjaan, setDataPekerjaan] = useState([]);
-  const idDataPekerjaanPerusahaan = [];
+  const [dataUser, setDataUser] = useState([]);
   const idLamaranPekerjaPerusahaan = [];
+  const idUser = [];
 
   useEffect(() => {
     if (auth.currentUser !== null) {
-      onValue(ref(db, "Lamaran Kerja"), (querySnapShot) => {
+      onValue(ref(db, "User"), (querySnapShot) => {
+        let data = querySnapShot.val() || {};
+        let dataDBUser = { ...data };
+        setDataUser(dataDBUser);
+      });
+
+      return onValue(ref(db, "Lamaran Kerja"), (querySnapShot) => {
         let data = querySnapShot.val() || {};
         let dataLamaranDB = { ...data };
         setDataLamaran(dataLamaranDB);
-      });
-
-      return onValue(ref(db, "Pekerjaan"), (querySnapShot) => {
-        let data = querySnapShot.val() || {};
-        let semuaPekerjaan = { ...data };
-        setDataPekerjaan(semuaPekerjaan);
       });
     } else {
       Alert.alert("You are not logged in yet, please login first");
@@ -32,28 +32,32 @@ const Applicants = ({ navigation }) => {
     }
   }, []);
 
-  Object.keys(dataPekerjaan).map((id_pekerjaan) => {
-    if (dataPekerjaan[id_pekerjaan]["email"] === auth.currentUser.email) {
-      idDataPekerjaanPerusahaan.push(id_pekerjaan);
-    }
-  });
-
   Object.keys(dataLamaran).map((key) => {
-    if (idDataPekerjaanPerusahaan.includes(dataLamaran[key]["id_pekerjaan"])) {
+    if (id === dataLamaran[key]["id_pekerjaan"]) {
       idLamaranPekerjaPerusahaan.push(key);
     }
+
     return true;
   });
 
+  idLamaranPekerjaPerusahaan.map((id_pekerjaan) => {
+    Object.keys(dataUser).map((id_user) => {
+      if (dataUser[id_user]["email"] === dataLamaran[id_pekerjaan]["email"]) {
+        idUser.push(id_user);
+      }
+    });
+  });
+
   const renderLamaran = () =>
-    idLamaranPekerjaPerusahaan.map((id_lamaran) => (
-      <ApplicantCard
+    idLamaranPekerjaPerusahaan.map((id_lamaran, i) => (
+      <ApplicantsPerJobCard
         navigation={navigation}
         dataLamaran={dataLamaran[id_lamaran]}
-        dataPekerjaan={dataPekerjaan[dataLamaran[id_lamaran]["id_pekerjaan"]]}
+        dataPekerjaan={data}
+        dataUser={dataUser[idUser[i]]}
         key={id_lamaran}
         id={id_lamaran}
-      ></ApplicantCard>
+      ></ApplicantsPerJobCard>
     ));
 
   return (
@@ -69,6 +73,16 @@ const Applicants = ({ navigation }) => {
   );
 };
 
-export default Applicants;
+export default ApplicantsPerJob;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  noJobContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+  },
+  noJobText: {
+    fontSize: 18,
+    fontWeight: "600",
+  },
+});

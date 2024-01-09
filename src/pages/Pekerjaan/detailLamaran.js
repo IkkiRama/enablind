@@ -51,6 +51,10 @@ const DetailLamaran = ({ navigation, route }) => {
   const RejectApplication = () => {
     if (dataLamaran["Status Lamaran"].status === "Rejected") {
       Alert.alert("You've already rejected this job application!");
+    } else if (
+      dataLamaran["Status Lamaran"].status === "Job Application Accepted"
+    ) {
+      Alert.alert("You've already Accepted this job application!");
     } else {
       Alert.alert(
         "Are you sure?",

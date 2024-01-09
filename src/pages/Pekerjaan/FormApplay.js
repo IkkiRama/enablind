@@ -153,6 +153,7 @@ const FormApplay = ({ navigation, route }) => {
                 autoCapitalize="none"
                 value={userLogin?.nama}
                 editable={false}
+                placeholderTextColor={COLORS.font}
               />
             </View>
 
@@ -166,6 +167,7 @@ const FormApplay = ({ navigation, route }) => {
                 textContentType="emailAddress"
                 value={userLogin?.email}
                 editable={false}
+                placeholderTextColor={COLORS.font}
               />
             </View>
 
@@ -175,7 +177,7 @@ const FormApplay = ({ navigation, route }) => {
                 style={styles.input}
                 placeholder="Phone Number"
                 autoCapitalize="none"
-                keyboardType="numeric"
+                keyboardType="phone-pad"
                 autoFocus={true}
                 value={phoneHumber}
                 onChangeText={(text) => setPhoneHumber(text)}

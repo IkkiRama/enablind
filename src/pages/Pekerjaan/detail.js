@@ -15,6 +15,7 @@ import {
   Navbar,
   Qualifications,
   OtherInfo,
+  ApplicantsPerJob,
 } from "../../components";
 
 import { COLORS, SAFEAREAVIEW, SHADOWS } from "../../constants";
@@ -51,7 +52,13 @@ const DetailJob = ({ route, navigation }) => {
             </>
           );
         case "Applicants":
-          return <Text>ASU</Text>;
+          return (
+            <ApplicantsPerJob
+              data={data}
+              id={id}
+              navigation={navigation}
+            ></ApplicantsPerJob>
+          );
       }
     } else {
       switch (activeTab) {
