@@ -8,7 +8,7 @@ import {
   StyleSheet,
   SafeAreaView,
 } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   JobDescriptions,
   JobTabs,
@@ -16,11 +16,23 @@ import {
   Qualifications,
   OtherInfo,
   ApplicantsPerJob,
+  CekAuth,
 } from "../../components";
 
 import { COLORS, SAFEAREAVIEW, SHADOWS } from "../../constants";
 const DetailJob = ({ route, navigation }) => {
+  return (
+    <RenderElement
+      route={route}
+      navigation={navigation}
+      userLogin={CekAuth()}
+    ></RenderElement>
+  );
+};
+
+const RenderElement = ({ route, navigation, userLogin }) => {
   const { data, id, isCompany } = route.params;
+  const [user, setUser] = useState(null);
   const tabs = isCompany
     ? ["Detail", "Applicants"]
     : ["Descriptions", "Qualifications", "Other info"];
@@ -30,6 +42,10 @@ const DetailJob = ({ route, navigation }) => {
     "Job Type": data["Type Job"],
     "Job Publish Date": data["Job Publish Date"],
   };
+
+  useEffect(() => {
+    setUser(userLogin);
+  }, [userLogin]);
 
   const displayTabContent = () => {
     if (isCompany) {
@@ -122,7 +138,7 @@ const DetailJob = ({ route, navigation }) => {
         </View>
       </ScrollView>
       <View style={styles.buttonContainer}>
-        {!isCompany ? (
+        {!isCompany && user?.role === "user" ? (
           <Pressable
             style={styles.buttonApply}
             onPress={() =>
