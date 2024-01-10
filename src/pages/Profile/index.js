@@ -7,6 +7,7 @@ import {
   ScrollView,
   Alert,
   Pressable,
+  Image,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import {
@@ -15,23 +16,80 @@ import {
   FontAwesome5,
   Octicons,
   Entypo,
+  Feather,
 } from "@expo/vector-icons";
 import { getAuth, signOut } from "firebase/auth";
 
 import { BottomMenu, CekAuth, Navbar } from "../../components";
-import { COLORS, SAFEAREAVIEW } from "../../constants";
+import { COLORS, SAFEAREAVIEW, images } from "../../constants";
+
+const RenderImage = ({ link }) => {
+  const [isLoadedImage, setIsLoadedImage] = useState(true);
+  return (
+    <Image
+      onLoad={() => setIsLoadedImage(false)}
+      style={styles.imageUser}
+      source={
+        isLoadedImage
+          ? images.defaultBanner
+          : {
+              uri: link,
+            }
+      }
+      resizeMode="contain"
+    />
+  );
+};
 
 const Profile = ({ navigation }) => {
+  return (
+    <RenderElement
+      navigation={navigation}
+      userLogin={CekAuth()}
+    ></RenderElement>
+  );
+};
+
+const RenderElement = ({ navigation, userLogin }) => {
   const auth = getAuth();
+  const [nama, setNama] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
+    setNama(userLogin?.nama);
+    setImage(userLogin?.image);
+    setEmail(userLogin?.email);
     if (auth.currentUser == null) {
       Alert.alert("You are not logged in yet, please login first");
       return navigation.replace("Login");
     }
-  }, []);
+  }, [userLogin]);
 
-  const RenderElement = (userLogin) => (
+  const handleLogout = () => {
+    Alert.alert(
+      "Are you sure?",
+      "Are you sure you're going to exit the account?",
+      [
+        // The "Yes" button
+        {
+          text: "Yes",
+          onPress: () => {
+            signOut(auth);
+            navigation.replace("Login");
+            Alert.alert("You are successfully logged out");
+          },
+        },
+        // The "No" button
+        // Does nothing but dismiss the dialog when tapped
+        {
+          text: "No",
+        },
+      ]
+    );
+  };
+
+  return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
       <Navbar />
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -43,18 +101,35 @@ const Profile = ({ navigation }) => {
 
         <View style={styles.containerWrapper}>
           <View style={styles.container}>
-            <View style={styles.imageContainer}>
-              <Ionicons name="person" size={50} color={COLORS.colorShadow} />
-            </View>
+            {image === null ? (
+              <View style={styles.imageContainer}>
+                <Ionicons name="person" size={50} color={COLORS.colorShadow} />
+              </View>
+            ) : (
+              <View style={styles.imageContainer}>
+                <RenderImage link={userLogin.image} />
+              </View>
+            )}
 
             <View style={styles.profileUserContainer}>
-              <Text style={styles.userName}>{userLogin?.nama}</Text>
-              <Text style={styles.userEmail}>{userLogin?.email}</Text>
+              <Text style={styles.userName}>{nama}</Text>
+              <Text style={styles.userEmail}>{email}</Text>
             </View>
           </View>
 
           {/* Main content */}
           <View style={styles.mainContainer}>
+            <Pressable
+              onPress={() => navigation.navigate("EditProfile")}
+              style={styles.perFitur}
+            >
+              <View style={styles.nameFiturContainer}>
+                <Feather name="edit" size={24} color={COLORS.font} />
+                <Text style={styles.profileFitur}>Edit Profile</Text>
+              </View>
+              <FontAwesome name="chevron-right" size={24} color={COLORS.font} />
+            </Pressable>
+
             <Pressable
               onPress={() => navigation.navigate("Bantuan")}
               style={styles.perFitur}
@@ -104,31 +179,6 @@ const Profile = ({ navigation }) => {
       />
     </SafeAreaView>
   );
-
-  const handleLogout = () => {
-    Alert.alert(
-      "Are you sure?",
-      "Are you sure you're going to exit the account?",
-      [
-        // The "Yes" button
-        {
-          text: "Yes",
-          onPress: () => {
-            signOut(auth);
-            navigation.replace("Login");
-            Alert.alert("You are successfully logged out");
-          },
-        },
-        // The "No" button
-        // Does nothing but dismiss the dialog when tapped
-        {
-          text: "No",
-        },
-      ]
-    );
-  };
-
-  return RenderElement(CekAuth());
 };
 
 export default Profile;
@@ -152,6 +202,11 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     justifyContent: "center",
     alignItems: "center",
+  },
+  imageUser: {
+    width: "95%",
+    height: "95%",
+    borderRadius: 50,
   },
   profileUserContainer: { flex: 1, marginLeft: 20 },
   userName: {

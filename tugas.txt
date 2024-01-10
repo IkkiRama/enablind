@@ -3,6 +3,12 @@ form applay
 placeholderTextColor="#868687" 
 
 
+Detail lamaran ketika yang login role nya company maka fotonya itu foto user, ketika yang login role nya user maka foto nya itu foto company yang user daftar
+
+Ketika user belum melengkapi data diri nya, maka user tidak boleh daftar kerja
+
+
+
 Company
 Image Company
 Job Description

@@ -35,6 +35,7 @@ const ApplicantsPerJobCard = ({
           dataLamaran,
           dataPekerjaan,
           id,
+          dataUser,
         })
       }
       style={styles.wrapper}
@@ -69,12 +70,13 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   imageJob: {
-    width: "12%",
-    height: 35,
+    width: "15%",
+    height: 45,
+    borderRadius: 5,
   },
 
   infoJob: {
-    width: "88%",
+    width: "85%",
     paddingHorizontal: 5,
     borderBottomColor: COLORS.borderColor,
     borderBottomWidth: 2,
@@ -88,6 +90,7 @@ const styles = StyleSheet.create({
   titleJobText: {
     fontSize: 19,
     fontWeight: "600",
+    lineHeight: 25,
   },
   companyText: {
     fontSize: 16,

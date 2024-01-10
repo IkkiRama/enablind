@@ -18,6 +18,7 @@ import {
   CompanyVacancy,
   FormInterview,
   AddVacancy,
+  EditProfile,
 } from "./src/pages";
 import Register from "./src/pages/Auth/register";
 import TentangAplikasi from "./src/pages/Profile/tentangAplikasi";
@@ -128,6 +129,12 @@ export default function App() {
         <Stack.Screen
           name="Add Vacancy"
           component={AddVacancy}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="EditProfile"
+          component={EditProfile}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

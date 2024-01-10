@@ -1,9 +1,8 @@
 // import * as firebase from "firebase";
-import { getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
-// Firebase config 
+import { getStorage } from "firebase/storage";
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBv3_vyVJnest7hjDU-8lVpASKPp9quc1g",
   authDomain: "react-native-crud-fireba-ea6c9.firebaseapp.com",
@@ -17,6 +16,6 @@ const firebaseConfig = {
 };
 // initialize firebase
 const FIREBASE = initializeApp(firebaseConfig);
-export const auth = getAuth();
-export const db = getDatabase(FIREBASE);
-export const database = getFirestore();
+const db = getDatabase(FIREBASE);
+const storage = getStorage();
+export { db, storage };

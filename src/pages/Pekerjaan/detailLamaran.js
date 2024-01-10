@@ -10,13 +10,12 @@ import {
   Pressable,
   Alert,
 } from "react-native";
-import { useState } from "react";
-import { getAuth } from "firebase/auth";
+import { useEffect, useState } from "react";
 import { ref, update } from "firebase/database";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import { db } from "../../configs/firebase";
-import { COLORS, SAFEAREAVIEW } from "../../constants";
+import { COLORS, SAFEAREAVIEW, images } from "../../constants";
 import {
   CekAuth,
   JourneyApplication,
@@ -24,13 +23,46 @@ import {
   Navbar,
 } from "../../components";
 
-const DetailLamaran = ({ navigation, route }) => {
-  const auth = getAuth();
-  const height = Dimensions.get("window").height;
-  const { dataLamaran, dataPekerjaan, id } = route.params;
+const RenderImage = ({ link }) => {
+  const [isLoadedImage, setIsLoadedImage] = useState(true);
+  return (
+    <Image
+      onLoad={() => setIsLoadedImage(false)}
+      style={styles.imageJob}
+      source={
+        isLoadedImage
+          ? images.defaultBanner
+          : {
+              uri: link,
+            }
+      }
+      resizeMode="contain"
+    />
+  );
+};
 
+const DetailLamaran = ({ navigation, route }) => {
+  return (
+    <RenderElement
+      navigation={navigation}
+      route={route}
+      userLogin={CekAuth()}
+    ></RenderElement>
+  );
+};
+
+const RenderElement = ({ navigation, route, userLogin }) => {
+  const height = Dimensions.get("window").height;
+  const { dataLamaran, dataPekerjaan, id, dataUser } = route.params;
   const tabs = ["My Information", "Journey Application"];
   const [activeTab, setActiveTab] = useState("My Information");
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    setUser(userLogin);
+  }, [userLogin]);
+
+  // return console.log(user.role);
 
   const displayTabContent = () => {
     switch (activeTab) {
@@ -152,54 +184,55 @@ const DetailLamaran = ({ navigation, route }) => {
     }
   };
 
-  const RenderElement = (userLogin) => {
-    return (
-      <SafeAreaView style={SAFEAREAVIEW.style}>
-        <Navbar
-          isBack={true}
-          goBack={() => navigation.goBack()}
-          isTitle="Detail Application"
-        ></Navbar>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <StatusBar
-            translucent
-            barStyle={"light-content"}
-            backgroundColor="transparent"
-          ></StatusBar>
+  return (
+    <SafeAreaView style={SAFEAREAVIEW.style}>
+      <Navbar
+        isBack={true}
+        goBack={() => navigation.goBack()}
+        isTitle="Detail Application"
+      ></Navbar>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <StatusBar
+          translucent
+          barStyle={"light-content"}
+          backgroundColor="transparent"
+        ></StatusBar>
 
-          <View style={styles.mainWrapper(height)}>
-            <View style={styles.jobInformationWrapper}>
-              <View style={styles.imageJobContainer}>
-                <Image
-                  style={styles.imageJob}
-                  source={{ uri: dataPekerjaan["Image Company"] }}
-                ></Image>
-              </View>
-              <View style={styles.jobInformation}>
-                <Text style={styles.jobTitle}>
-                  {dataPekerjaan["Job Title"]}
-                </Text>
-                <Text style={styles.company}>{dataPekerjaan["Company"]}</Text>
-                <Text style={styles.statusApplication}>
-                  Status : {dataLamaran["Status Lamaran"].status}
-                </Text>
-
-                {dataLamaran["Status Lamaran"].tempat !== "" ? (
-                  <View style={styles.PlaceForInterview}>
-                    <Text style={styles.statusApplication}>
-                      Place for Interview
-                    </Text>
-                    <Text style={styles.interviewApplication}>
-                      {dataLamaran["Status Lamaran"].tempat}
-                    </Text>
-                  </View>
-                ) : (
-                  ""
-                )}
-              </View>
+        <View style={styles.mainWrapper(height)}>
+          <View style={styles.jobInformationWrapper}>
+            <View style={styles.imageJobContainer}>
+              <RenderImage
+                link={
+                  user?.role === "company"
+                    ? dataUser.image
+                    : dataPekerjaan["Image Company"]
+                }
+              ></RenderImage>
             </View>
 
-            {/* <View style={styles.tabContainer}>
+            <View style={styles.jobInformation}>
+              <Text style={styles.jobTitle}>{dataPekerjaan["Job Title"]}</Text>
+              <Text style={styles.company}>{dataPekerjaan["Company"]}</Text>
+              <Text style={styles.statusApplication}>
+                Status : {dataLamaran["Status Lamaran"].status}
+              </Text>
+
+              {dataLamaran["Status Lamaran"].tempat !== "" ? (
+                <View style={styles.PlaceForInterview}>
+                  <Text style={styles.statusApplication}>
+                    Place for Interview
+                  </Text>
+                  <Text style={styles.interviewApplication}>
+                    {dataLamaran["Status Lamaran"].tempat}
+                  </Text>
+                </View>
+              ) : (
+                ""
+              )}
+            </View>
+          </View>
+
+          {/* <View style={styles.tabContainer}>
             {tabs.map((tab, i) => (
               <Pressable
                 key={i}
@@ -211,69 +244,61 @@ const DetailLamaran = ({ navigation, route }) => {
             ))}
           </View> */}
 
-            <View style={styles.displayTabContentContainer}>
-              <View style={styles.displayTabContent}>
-                {displayTabContent()}
-              </View>
-            </View>
+          <View style={styles.displayTabContentContainer}>
+            <View style={styles.displayTabContent}>{displayTabContent()}</View>
           </View>
-        </ScrollView>
+        </View>
+      </ScrollView>
 
-        {userLogin?.role === "company" ? (
-          <View style={styles.buttonContainer}>
-            <Pressable
-              onPress={() => RejectApplication()}
-              style={styles.buttonReject}
-            >
-              <FontAwesome5 name="trash" size={24} color={COLORS.lightWhite} />
-            </Pressable>
+      {userLogin?.role === "company" ? (
+        <View style={styles.buttonContainer}>
+          <Pressable
+            onPress={() => RejectApplication()}
+            style={styles.buttonReject}
+          >
+            <FontAwesome5 name="trash" size={24} color={COLORS.lightWhite} />
+          </Pressable>
 
-            <Pressable
-              disabled={
-                dataLamaran["Status Lamaran"].status === "Rejected"
-                  ? true
-                  : false
-              }
-              onPress={() => UpdateStatusLamaran()}
-              style={styles.buttonProses(dataLamaran["Status Lamaran"].status)}
-            >
-              {dataLamaran["Status Lamaran"].status ===
-              "Pending for Interview" ? (
-                <Text style={styles.buttonProsesText}>CALL FOR INTERVIEW</Text>
-              ) : (
-                ""
-              )}
-              {dataLamaran["Status Lamaran"].status === "Rejected" ? (
-                <Text style={styles.buttonProsesText}>
-                  YOU'VE ALREADY REJECTED
-                </Text>
-              ) : (
-                ""
-              )}
-              {dataLamaran["Status Lamaran"].status ===
-              "Job Application Accepted" ? (
-                <Text style={styles.buttonProsesText}>
-                  YOU'VE ALREADY ACCEPTED
-                </Text>
-              ) : (
-                ""
-              )}
-              {dataLamaran["Status Lamaran"].status ===
-              "Invited to Interview" ? (
-                <Text style={styles.buttonProsesText}>ACCEPT APPLICANTS</Text>
-              ) : (
-                ""
-              )}
-            </Pressable>
-          </View>
-        ) : (
-          ""
-        )}
-      </SafeAreaView>
-    );
-  };
-
-  return RenderElement(CekAuth());
+          <Pressable
+            disabled={
+              dataLamaran["Status Lamaran"].status === "Rejected" ? true : false
+            }
+            onPress={() => UpdateStatusLamaran()}
+            style={styles.buttonProses(dataLamaran["Status Lamaran"].status)}
+          >
+            {dataLamaran["Status Lamaran"].status ===
+            "Pending for Interview" ? (
+              <Text style={styles.buttonProsesText}>CALL FOR INTERVIEW</Text>
+            ) : (
+              ""
+            )}
+            {dataLamaran["Status Lamaran"].status === "Rejected" ? (
+              <Text style={styles.buttonProsesText}>
+                YOU'VE ALREADY REJECTED
+              </Text>
+            ) : (
+              ""
+            )}
+            {dataLamaran["Status Lamaran"].status ===
+            "Job Application Accepted" ? (
+              <Text style={styles.buttonProsesText}>
+                YOU'VE ALREADY ACCEPTED
+              </Text>
+            ) : (
+              ""
+            )}
+            {dataLamaran["Status Lamaran"].status === "Invited to Interview" ? (
+              <Text style={styles.buttonProsesText}>ACCEPT APPLICANTS</Text>
+            ) : (
+              ""
+            )}
+          </Pressable>
+        </View>
+      ) : (
+        ""
+      )}
+    </SafeAreaView>
+  );
 };
 
 export default DetailLamaran;
@@ -298,6 +323,7 @@ const styles = StyleSheet.create({
   imageJob: {
     width: 70,
     height: 70,
+    borderRadius: 5,
   },
   jobInformation: {
     width: "80%",

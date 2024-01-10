@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Image, StyleSheet, Text, View, Pressable } from "react-native";
 
+import CekAuth from "../CekAuth";
 import { COLORS, images } from "../../../constants";
 
 const RenderImage = ({ link }) => {
@@ -21,7 +22,33 @@ const RenderImage = ({ link }) => {
   );
 };
 
-const ApplicantCard = ({ navigation, dataLamaran, dataPekerjaan, id }) => {
+const ApplicantCard = ({
+  navigation,
+  dataLamaran,
+  dataPekerjaan,
+  id,
+  dataUser,
+}) => {
+  return (
+    <RenderElement
+      navigation={navigation}
+      dataLamaran={dataLamaran}
+      dataPekerjaan={dataPekerjaan}
+      id={id}
+      dataUser={dataUser}
+      userLogin={CekAuth()}
+    ></RenderElement>
+  );
+};
+
+const RenderElement = ({
+  navigation,
+  dataLamaran,
+  dataPekerjaan,
+  id,
+  dataUser,
+  userLogin,
+}) => {
   return (
     <Pressable
       onPress={() =>
@@ -29,11 +56,16 @@ const ApplicantCard = ({ navigation, dataLamaran, dataPekerjaan, id }) => {
           dataLamaran,
           dataPekerjaan,
           id,
+          dataUser,
         })
       }
       style={styles.wrapper}
     >
-      <RenderImage link={dataPekerjaan["Image Company"]} />
+      {userLogin?.role === "company" ? (
+        <RenderImage link={dataUser["image"]} />
+      ) : (
+        <RenderImage link={dataPekerjaan["Image Company"]} />
+      )}
 
       <View style={styles.infoJob}>
         {/* Title */}

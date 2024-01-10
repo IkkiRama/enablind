@@ -38,8 +38,15 @@ const JobCard = ({ navigation, data, id, isCompany = false }) => {
             <Text style={styles.titleJobText}>{data["Job Title"]}</Text>
             <Text style={styles.companyText}>{data["Company"]}</Text>
           </View>
-
-          <Ionicons name="ios-bookmark-outline" size={25} color={COLORS.font} />
+          {isCompany ? (
+            ""
+          ) : (
+            <Ionicons
+              name="ios-bookmark-outline"
+              size={25}
+              color={COLORS.font}
+            />
+          )}
         </View>
         <Text style={styles.locationText}>{data["Job Location"]}</Text>
 
@@ -83,12 +90,13 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   imageJob: {
-    width: "12%",
-    height: 35,
+    width: "15%",
+    height: 50,
+    borderRadius: 5,
   },
 
   infoJob: {
-    width: "88%",
+    width: "85%",
     paddingHorizontal: 5,
     borderBottomColor: COLORS.borderColor,
     borderBottomWidth: 2,
@@ -102,6 +110,7 @@ const styles = StyleSheet.create({
   titleJobText: {
     fontSize: 19,
     fontWeight: "600",
+    lineHeight: 25,
   },
   companyText: {
     fontSize: 16,
