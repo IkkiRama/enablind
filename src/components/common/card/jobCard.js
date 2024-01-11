@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getAuth } from "firebase/auth";
+import { onValue, push, ref, remove } from "firebase/database";
 import { Ionicons } from "@expo/vector-icons";
-import { Image, StyleSheet, Text, View, Pressable } from "react-native";
+import { Image, StyleSheet, Text, View, Pressable, Alert } from "react-native";
 
+import { db } from "../../../configs/firebase";
 import { COLORS, images } from "../../../constants";
 import AktifMerekrut from "../../../../assets/Icons/aktif-merekrut.svg";
 
@@ -24,6 +27,53 @@ const RenderImage = ({ link }) => {
 };
 
 const JobCard = ({ navigation, data, id, isCompany = false }) => {
+  const auth = getAuth();
+  const [cekBerkala, setCekBerkala] = useState(false);
+  const [pekerjaanTersimpan, setPekerjaanTersimpan] = useState([]);
+  const arrayIDPekerjaanTersimpan = [];
+
+  useEffect(() => {
+    if (auth.currentUser !== null) {
+      return onValue(ref(db, "Pekerjaan Tersimpan"), (querySnapShot) => {
+        let data = querySnapShot.val() || {};
+        let dataPekerjaanTersimpan = { ...data };
+        setPekerjaanTersimpan(dataPekerjaanTersimpan);
+      });
+    }
+  }, [cekBerkala]);
+
+  const SaveJob = () => {
+    if (auth.currentUser === null) {
+      Alert.alert("You are not logged in yet, please login first");
+      return navigation.replace("Login");
+    } else {
+      // add to db
+      // cek nya pakai include
+      const postData = {
+        email: auth.currentUser.email,
+        id_pekerjaan: id,
+      };
+
+      push(ref(db, "Pekerjaan Tersimpan"), postData);
+      setCekBerkala(!cekBerkala);
+    }
+  };
+
+  const RemoveSaveJob = () => {
+    Object.keys(pekerjaanTersimpan).map((id_pekerjaan_tersimpan) => {
+      if (pekerjaanTersimpan[id_pekerjaan_tersimpan]["id_pekerjaan"] === id) {
+        remove(ref(db, `Pekerjaan Tersimpan/${id_pekerjaan_tersimpan}`));
+        setCekBerkala(!cekBerkala);
+      }
+    });
+  };
+
+  Object.keys(pekerjaanTersimpan).map((id_pekerjaan_tersimpan) =>
+    arrayIDPekerjaanTersimpan.push(
+      pekerjaanTersimpan[id_pekerjaan_tersimpan]["id_pekerjaan"]
+    )
+  );
+
   return (
     <Pressable
       onPress={() => navigation.navigate("DetailJob", { data, id, isCompany })}
@@ -40,12 +90,18 @@ const JobCard = ({ navigation, data, id, isCompany = false }) => {
           </View>
           {isCompany ? (
             ""
+          ) : arrayIDPekerjaanTersimpan.includes(id) ? (
+            <Pressable onPress={RemoveSaveJob} style={styles.saveJobBTN}>
+              <Ionicons name="ios-bookmark" size={25} color={COLORS.font} />
+            </Pressable>
           ) : (
-            <Ionicons
-              name="ios-bookmark-outline"
-              size={25}
-              color={COLORS.font}
-            />
+            <Pressable onPress={SaveJob} style={styles.saveJobBTN}>
+              <Ionicons
+                name="ios-bookmark-outline"
+                size={25}
+                color={COLORS.font}
+              />
+            </Pressable>
           )}
         </View>
         <Text style={styles.locationText}>{data["Job Location"]}</Text>
@@ -168,5 +224,8 @@ const styles = StyleSheet.create({
   melamarMudahText: {
     marginLeft: 5,
     color: COLORS.gray,
+  },
+  saveJobBTN: {
+    height: 27,
   },
 });

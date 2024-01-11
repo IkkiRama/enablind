@@ -124,7 +124,7 @@ const Bantuan = ({ navigation }) => {
                     <FontAwesome name="phone" size={20} color={COLORS.font} />
                     <Text style={styles.perBantuanTitle}>Telepon</Text>
                   </View>
-                  <Text style={styles.perBantuanText}>082133320489</Text>
+                  <Text style={styles.perBantuanText}>+6282133320489</Text>
                 </View>
                 <FontAwesome
                   name="chevron-right"

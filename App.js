@@ -19,6 +19,7 @@ import {
   FormInterview,
   AddVacancy,
   EditProfile,
+  SavedJobs,
 } from "./src/pages";
 import Register from "./src/pages/Auth/register";
 import TentangAplikasi from "./src/pages/Profile/tentangAplikasi";
@@ -135,6 +136,12 @@ export default function App() {
         <Stack.Screen
           name="EditProfile"
           component={EditProfile}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Saved Jobs"
+          component={SavedJobs}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

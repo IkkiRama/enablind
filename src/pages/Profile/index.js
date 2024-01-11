@@ -11,12 +11,12 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import {
+  Feather,
+  Octicons,
   Ionicons,
+  AntDesign,
   FontAwesome,
   FontAwesome5,
-  Octicons,
-  Entypo,
-  Feather,
 } from "@expo/vector-icons";
 import { getAuth, signOut } from "firebase/auth";
 
@@ -60,7 +60,7 @@ const RenderElement = ({ navigation, userLogin }) => {
     setNama(userLogin?.nama);
     setImage(userLogin?.image);
     setEmail(userLogin?.email);
-    if (auth.currentUser == null) {
+    if (auth.currentUser === null) {
       Alert.alert("You are not logged in yet, please login first");
       return navigation.replace("Login");
     }
@@ -131,11 +131,22 @@ const RenderElement = ({ navigation, userLogin }) => {
             </Pressable>
 
             <Pressable
+              onPress={() => navigation.navigate("Saved Jobs")}
+              style={styles.perFitur}
+            >
+              <View style={styles.nameFiturContainer}>
+                <Ionicons name="ios-bookmark" size={25} color={COLORS.font} />
+                <Text style={styles.profileFitur}>Saved Jobs</Text>
+              </View>
+              <FontAwesome name="chevron-right" size={24} color={COLORS.font} />
+            </Pressable>
+
+            <Pressable
               onPress={() => navigation.navigate("Bantuan")}
               style={styles.perFitur}
             >
               <View style={styles.nameFiturContainer}>
-                <Entypo name="help-with-circle" size={24} color={COLORS.font} />
+                <AntDesign name="customerservice" size={24} color="black" />
                 <Text style={styles.profileFitur}>Help</Text>
               </View>
               <FontAwesome name="chevron-right" size={24} color={COLORS.font} />

@@ -20,7 +20,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { ref, onValue, update } from "firebase/database";
 
 import { db, storage } from "../../configs/firebase";
-import { CekAuth, Navbar } from "../../components";
+import { BottomMenu, CekAuth, Navbar } from "../../components";
 import { COLORS, SAFEAREAVIEW, SHADOWS } from "../../constants";
 const EditProfile = ({ navigation }) => {
   return (
@@ -266,11 +266,7 @@ const ReturnElement = ({ navigation, userLogin }) => {
 
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
-      <Navbar
-        isBack={true}
-        goBack={() => navigation.goBack()}
-        isTitle="Update Information"
-      ></Navbar>
+      <Navbar></Navbar>
       <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar
           translucent
@@ -280,6 +276,8 @@ const ReturnElement = ({ navigation, userLogin }) => {
 
         <View style={styles.mainWrapper}>
           <View style={styles.container}>
+            <Text style={styles.title}>Update Information</Text>
+
             <View style={styles.formGroup}>
               <Text style={styles.formText}>Full Name</Text>
               <TextInput
@@ -293,14 +291,12 @@ const ReturnElement = ({ navigation, userLogin }) => {
                 onChangeText={(text) => setNama(text)}
               />
             </View>
-
             <View style={styles.formGroup}>
               <Text style={styles.formText}>Photo Profile</Text>
               <Pressable style={styles.buttonPickImage} onPress={pickImage}>
                 <Text style={styles.buttonPickImageText}>Pick an Image</Text>
               </Pressable>
             </View>
-
             {image && (
               <View style={styles.fotoProfileContainer}>
                 <Pressable
@@ -324,7 +320,6 @@ const ReturnElement = ({ navigation, userLogin }) => {
                 ></Image>
               </View>
             )}
-
             <Pressable
               style={styles.buttonApply}
               onPress={() => UpdateProfile()}
@@ -334,6 +329,11 @@ const ReturnElement = ({ navigation, userLogin }) => {
           </View>
         </View>
       </ScrollView>
+      <BottomMenu
+        focused="Profile"
+        navigationHandle={navigation}
+        userLogin={CekAuth()}
+      />
     </SafeAreaView>
   );
 };

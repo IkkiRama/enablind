@@ -16,6 +16,7 @@ import CompanyVacancy from "./Pekerjaan/CompanyVacancy";
 import FormInterview from "./Pekerjaan/FormInterview";
 import AddVacancy from "./Pekerjaan/AddVacancy";
 import EditProfile from "./Profile/EditProfile";
+import SavedJobs from "./Profile/SavedJobs";
 
 export {
   Home,
@@ -36,4 +37,5 @@ export {
   FormInterview,
   AddVacancy,
   EditProfile,
+  SavedJobs,
 };

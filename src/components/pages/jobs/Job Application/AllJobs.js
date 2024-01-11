@@ -4,7 +4,7 @@ import { ref, onValue } from "firebase/database";
 import { db } from "../../../../configs/firebase";
 import JobCard from "../../../common/card/jobCard";
 
-const AllJobs = ({ navigation }) => {
+const AllJobs = ({ navigation, isSavedJobPage = false }) => {
   const [dataPekerjaan, setDataPekerjaan] = useState([]);
 
   useEffect(() => {
@@ -34,6 +34,8 @@ const AllJobs = ({ navigation }) => {
           <Text style={styles.noJobText}>No Job Available</Text>
         </View>
       )}
+
+      {isSavedJobPage ? <Text>ANJAY</Text> : ""}
     </>
   );
 };

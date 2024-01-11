@@ -39,6 +39,7 @@ const PopularJobs = ({ navigation }) => {
               key={i}
               navigation={navigation}
               data={dataPekerjaan[id_pekerjaan]}
+              id={id_pekerjaan}
             ></JobCard>
           ))}
         </View>
