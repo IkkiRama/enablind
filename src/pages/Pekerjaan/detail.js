@@ -105,7 +105,11 @@ const RenderElement = ({ route, navigation, userLogin }) => {
 
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
-      <Navbar isBack={true} goBack={() => navigation.goBack()}></Navbar>
+      <Navbar
+        navigation={navigation}
+        isBack={true}
+        goBack={() => navigation.goBack()}
+      ></Navbar>
       <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar
           translucent

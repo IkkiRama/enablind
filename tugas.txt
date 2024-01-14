@@ -1,9 +1,22 @@
-Popular job perhatikan
-form applay
-placeholderTextColor="#868687" 
+Pkeerjaan tersimpan di perbaharui bug nya di bagian all job dan rekomendasi job
 
 
-Detail lamaran ketika yang login role nya company maka fotonya itu foto user, ketika yang login role nya user maka foto nya itu foto company yang user daftar
+Rifki romadhan telah melamar ke .....
+
+cek lamaran yang sesuai dengan user yang login
+cek notifikasi yang sesuai dengan lamaran yang telah di filter
+apabila di klik maka akan menuju ke detail lamaran.
+
+1
+
+
+id_lamaran
+Title
+message
+
+
+Detail lamaran ketika yang login role nya company maka fotonya itu foto user,
+ketika yang login role nya user maka foto nya itu foto company yang user daftar
 
 Ketika user belum melengkapi data diri nya, maka user tidak boleh daftar kerja
 

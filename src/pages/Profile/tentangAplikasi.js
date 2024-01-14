@@ -23,6 +23,7 @@ const TentangAplikasi = ({ navigation }) => {
         isBack={true}
         goBack={() => navigation.goBack()}
         isTitle="About enablind"
+        navigation={navigation}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar

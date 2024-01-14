@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 import { MaterialIcons, Foundation, Ionicons } from "@expo/vector-icons";
-import { COLORS, SHADOWS } from "../../constants";
+import { COLORS } from "../../constants";
 
 const BottomMenu = ({ focused, navigationHandle, userLogin }) => {
   return (

@@ -2,38 +2,22 @@ import {
   Text,
   View,
   StatusBar,
-  Pressable,
   ScrollView,
   StyleSheet,
   SafeAreaView,
   Dimensions,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import { getAuth } from "firebase/auth";
-import { onValue, ref } from "firebase/database";
+import React from "react";
 import { AllJobs, BottomMenu, CekAuth, Navbar } from "../../components";
 
 import { COLORS, SAFEAREAVIEW } from "../../constants";
-import { db } from "../../configs/firebase";
 
 const SavedJobs = ({ navigation }) => {
-  const auth = getAuth();
   const minHeightPage = Dimensions.get("window").height;
-  const [pekerjaanTersimpan, setPekerjaanTersimpan] = useState([]);
-
-  useEffect(() => {
-    if (auth.currentUser !== null) {
-      return onValue(ref(db, "Pekerjaan Tersimpan"), (querySnapShot) => {
-        let data = querySnapShot.val() || {};
-        let dataPekerjaanTersimpan = { ...data };
-        setPekerjaanTersimpan(dataPekerjaanTersimpan);
-      });
-    }
-  }, []);
 
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
-      <Navbar></Navbar>
+      <Navbar navigation={navigation}></Navbar>
       <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar
           translucent

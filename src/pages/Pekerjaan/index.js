@@ -35,7 +35,7 @@ const Pekerjaan = ({ navigation }) => {
 
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
-      <Navbar></Navbar>
+      <Navbar navigation={navigation}></Navbar>
       <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar
           translucent

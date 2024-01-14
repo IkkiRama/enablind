@@ -44,12 +44,13 @@ const Home = ({ navigation }) => {
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
       <Navbar
+        navigation={navigation}
         isHomePage={true}
         smallMessage={dataUserKeys.length === 0 ? "Hii" : `Welcome Back`}
         mainMessage={
           dataUserKeys.length === 0
             ? "Welcome to our app"
-            : `${userLogin?.nama}👋`
+            : `${userLogin?.nama}`
         }
       ></Navbar>
       <ScrollView showsVerticalScrollIndicator={false}>

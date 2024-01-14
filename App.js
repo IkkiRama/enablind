@@ -20,6 +20,7 @@ import {
   AddVacancy,
   EditProfile,
   SavedJobs,
+  Notifikasi,
 } from "./src/pages";
 import Register from "./src/pages/Auth/register";
 import TentangAplikasi from "./src/pages/Profile/tentangAplikasi";
@@ -142,6 +143,12 @@ export default function App() {
         <Stack.Screen
           name="Saved Jobs"
           component={SavedJobs}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Notifikasi"
+          component={Notifikasi}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

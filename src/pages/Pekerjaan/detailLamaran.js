@@ -11,8 +11,8 @@ import {
   Alert,
 } from "react-native";
 import { useEffect, useState } from "react";
-import { ref, update } from "firebase/database";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { push, ref, update } from "firebase/database";
+import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 
 import { db } from "../../configs/firebase";
 import { COLORS, SAFEAREAVIEW, images } from "../../constants";
@@ -61,8 +61,6 @@ const RenderElement = ({ navigation, route, userLogin }) => {
   useEffect(() => {
     setUser(userLogin);
   }, [userLogin]);
-
-  // return console.log(user.role);
 
   const displayTabContent = () => {
     switch (activeTab) {
@@ -115,6 +113,13 @@ const RenderElement = ({ navigation, route, userLogin }) => {
                 [id]: DataUpdated,
               });
 
+              push(ref(db, "Notifikasi"), {
+                id_lamaran: id,
+                isread: false,
+                title: "Rejection Notice",
+                message: `We would like to thank you for your participation. Unfortunately, we must inform you that your application for the position of ${dataPekerjaan["Job Title"]} has been rejected. We appreciate your effort and interest. Please feel free to apply again in the future.`,
+              });
+
               Alert.alert(
                 "You have successfully rejected this job application!"
               );
@@ -137,6 +142,7 @@ const RenderElement = ({ navigation, route, userLogin }) => {
         dataLamaran,
         dataPekerjaan,
         id,
+        dataUser,
       });
     } else if (
       dataLamaran["Status Lamaran"].status === "Invited to Interview"
@@ -168,6 +174,13 @@ const RenderElement = ({ navigation, route, userLogin }) => {
                 [id]: DataUpdated,
               });
 
+              push(ref(db, "Notifikasi"), {
+                id_lamaran: id,
+                isread: false,
+                title: "Congratulations! You've been accepted!",
+                message: `We are pleased to inform you that you have been accepted for the position of ${dataPekerjaan["Job Title"]}`,
+              });
+
               Alert.alert(
                 "You have successfully accepted this job application!"
               );
@@ -187,6 +200,7 @@ const RenderElement = ({ navigation, route, userLogin }) => {
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
       <Navbar
+        navigation={navigation}
         isBack={true}
         goBack={() => navigation.goBack()}
         isTitle="Detail Application"
@@ -201,13 +215,43 @@ const RenderElement = ({ navigation, route, userLogin }) => {
         <View style={styles.mainWrapper(height)}>
           <View style={styles.jobInformationWrapper}>
             <View style={styles.imageJobContainer}>
-              <RenderImage
-                link={
-                  user?.role === "company"
-                    ? dataUser.image
-                    : dataPekerjaan["Image Company"]
-                }
-              ></RenderImage>
+              {/* {dataUser["image"] === "" ||
+              dataUser["image"] === undefined ||
+              dataUser["image"] === null ? (
+                <View style={styles.fotoDefaultUser}>
+                  <Ionicons
+                    name="person"
+                    size={30}
+                    color={COLORS.colorShadow}
+                  />
+                </View>
+              ) : (
+                <RenderImage
+                  link={
+                    user?.role === "company"
+                      ? dataUser.image
+                      : dataPekerjaan["Image Company"]
+                  }
+                ></RenderImage>
+              )} */}
+
+              {userLogin?.role === "company" ? (
+                dataUser["image"] === "" ||
+                dataUser["image"] === undefined ||
+                dataUser["image"] === null ? (
+                  <View style={styles.fotoDefaultUser}>
+                    <Ionicons
+                      name="person"
+                      size={30}
+                      color={COLORS.colorShadow}
+                    />
+                  </View>
+                ) : (
+                  <RenderImage link={dataUser.image} />
+                )
+              ) : (
+                <RenderImage link={dataPekerjaan["Image Company"]} />
+              )}
             </View>
 
             <View style={styles.jobInformation}>
@@ -268,12 +312,14 @@ const RenderElement = ({ navigation, route, userLogin }) => {
           >
             {dataLamaran["Status Lamaran"].status ===
             "Pending for Interview" ? (
-              <Text style={styles.buttonProsesText}>CALL FOR INTERVIEW</Text>
+              <Text style={styles.buttonProsesText} numberOfLines={1}>
+                CALL FOR INTERVIEW
+              </Text>
             ) : (
               ""
             )}
             {dataLamaran["Status Lamaran"].status === "Rejected" ? (
-              <Text style={styles.buttonProsesText}>
+              <Text style={styles.buttonProsesText} numberOfLines={1}>
                 YOU'VE ALREADY REJECTED
               </Text>
             ) : (
@@ -281,14 +327,16 @@ const RenderElement = ({ navigation, route, userLogin }) => {
             )}
             {dataLamaran["Status Lamaran"].status ===
             "Job Application Accepted" ? (
-              <Text style={styles.buttonProsesText}>
+              <Text style={styles.buttonProsesText} numberOfLines={1}>
                 YOU'VE ALREADY ACCEPTED
               </Text>
             ) : (
               ""
             )}
             {dataLamaran["Status Lamaran"].status === "Invited to Interview" ? (
-              <Text style={styles.buttonProsesText}>ACCEPT APPLICANTS</Text>
+              <Text style={styles.buttonProsesText} numberOfLines={1}>
+                ACCEPT APPLICANTS
+              </Text>
             ) : (
               ""
             )}
@@ -320,6 +368,17 @@ const styles = StyleSheet.create({
     width: "20%",
     // marginRight: 15,
   },
+
+  fotoDefaultUser: {
+    width: 70,
+    height: 70,
+    elevation: 1,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: COLORS.white,
+  },
+
   imageJob: {
     width: 70,
     height: 70,

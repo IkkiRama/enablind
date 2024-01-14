@@ -14,6 +14,7 @@ import {
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { ref, push } from "firebase/database";
+import DropDownPicker from "react-native-dropdown-picker";
 
 import { COLORS } from "../../constants";
 import { db } from "../../configs/firebase";
@@ -24,17 +25,30 @@ const Register = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [open, setOpen] = useState(false);
+  const [tipeUser, setTipeUser] = useState("");
+  const [items, setItems] = useState([
+    { label: "Corporate", value: "company" },
+    { label: "Jobseeker", value: "user" },
+  ]);
+
   const auth = getAuth();
 
   const reset = () => {
     // Reset the state of our inputs after logging in or out
     setNama("");
     setEmail("");
+    setTipeUser("");
     setPassword("");
   };
 
   const validation = () => {
-    if (nama.trim() === "" || email.trim() === "" || password.trim() === "") {
+    if (
+      nama.trim() === "" ||
+      email.trim() === "" ||
+      password.trim() === "" ||
+      tipeUser.trim() === ""
+    ) {
       Alert.alert("Please fill in all data");
       return false;
     }
@@ -60,7 +74,8 @@ const Register = ({ navigation }) => {
             nama,
             email,
             password,
-            role: "user",
+            role: tipeUser,
+            image: "",
           });
           reset();
           Alert.alert("You have successfully registered!");
@@ -94,6 +109,23 @@ const Register = ({ navigation }) => {
               value={nama}
               onChangeText={(text) => setNama(text)}
             />
+            <DropDownPicker
+              open={open}
+              value={tipeUser}
+              items={items}
+              setOpen={setOpen}
+              setValue={setTipeUser}
+              setItems={setItems}
+              listMode="SCROLLVIEW"
+              placeholder="You are a ..."
+              placeholderStyle={{
+                color: COLORS.font,
+                fontWeight: "500",
+              }}
+              dropDownContainerStyle={[{ borderWidth: 0 }]}
+              style={[styles.input, { borderWidth: 0 }]}
+            />
+
             <TextInput
               style={styles.input}
               placeholder="Email"

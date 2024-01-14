@@ -60,7 +60,7 @@ const Artikel = ({ navigation }) => {
 
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
-      <Navbar />
+      <Navbar navigation={navigation} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar
           translucent

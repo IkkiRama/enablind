@@ -130,6 +130,7 @@ const FormApplay = ({ navigation, route }) => {
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
       <Navbar
+        navigation={navigation}
         isBack={true}
         goBack={() => navigation.goBack()}
         isTitle="CV Maker"

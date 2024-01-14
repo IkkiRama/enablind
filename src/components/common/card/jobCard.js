@@ -9,6 +9,7 @@ import { COLORS, images } from "../../../constants";
 import AktifMerekrut from "../../../../assets/Icons/aktif-merekrut.svg";
 
 const RenderImage = ({ link }) => {
+  const auth = getAuth();
   const [isLoadedImage, setIsLoadedImage] = useState(true);
   return (
     <Image
@@ -68,11 +69,16 @@ const JobCard = ({ navigation, data, id, isCompany = false }) => {
     });
   };
 
-  Object.keys(pekerjaanTersimpan).map((id_pekerjaan_tersimpan) =>
-    arrayIDPekerjaanTersimpan.push(
-      pekerjaanTersimpan[id_pekerjaan_tersimpan]["id_pekerjaan"]
-    )
-  );
+  Object.keys(pekerjaanTersimpan).map((id_pekerjaan_tersimpan) => {
+    if (
+      pekerjaanTersimpan[id_pekerjaan_tersimpan]["email"] ===
+      auth.currentUser.email
+    ) {
+      arrayIDPekerjaanTersimpan.push(
+        pekerjaanTersimpan[id_pekerjaan_tersimpan]["id_pekerjaan"]
+      );
+    }
+  });
 
   return (
     <Pressable
@@ -84,7 +90,7 @@ const JobCard = ({ navigation, data, id, isCompany = false }) => {
       <View style={styles.infoJob}>
         {/* Title */}
         <View style={styles.textWrapper}>
-          <View>
+          <View style={styles.textContainer}>
             <Text style={styles.titleJobText}>{data["Job Title"]}</Text>
             <Text style={styles.companyText}>{data["Company"]}</Text>
           </View>
@@ -112,12 +118,12 @@ const JobCard = ({ navigation, data, id, isCompany = false }) => {
             height={27}
             style={styles.aktifMerekrutIcon}
           ></AktifMerekrut>
-          <Text style={styles.aktifMerekrutText}>Aktif Merekrut</Text>
+          <Text style={styles.aktifMerekrutText}>Actively Recruiting</Text>
         </View>
 
         <View style={styles.infoPelamar}>
           <Text style={styles.infoPelamarText}>
-            {data["Jumlah Pelamar"]} Pelamar
+            {data["Jumlah Pelamar"]} Applicants
           </Text>
 
           <View style={styles.infoPelamarDot}></View>
@@ -129,7 +135,7 @@ const JobCard = ({ navigation, data, id, isCompany = false }) => {
                 uri: "https://firebasestorage.googleapis.com/v0/b/react-native-crud-fireba-ea6c9.appspot.com/o/Enablind%2FLogo%20Doang.png?alt=media&token=bc2b4da5-f72f-42ae-9cd2-b6c495c3cf26",
               }}
             ></Image>
-            <Text style={styles.melamarMudahText}>Melamar Mudah</Text>
+            <Text style={styles.melamarMudahText}>Applying Easy</Text>
           </View>
         </View>
       </View>
@@ -163,6 +169,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 
+  textContainer: {
+    width: "90%",
+  },
+
   titleJobText: {
     fontSize: 19,
     fontWeight: "600",
@@ -187,7 +197,6 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   aktifMerekrutText: {
-    fontSize: 13,
     marginLeft: 5,
     color: COLORS.gray,
   },

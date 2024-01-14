@@ -10,14 +10,14 @@ import {
   Alert,
 } from "react-native";
 import { useState } from "react";
-import { ref, update } from "firebase/database";
+import { push, ref, update } from "firebase/database";
 
 import { db } from "../../configs/firebase";
 import { Navbar } from "../../components";
 import { COLORS, SAFEAREAVIEW, SHADOWS } from "../../constants";
 
 const FormInterview = ({ navigation, route }) => {
-  const { dataLamaran, dataPekerjaan, id } = route.params;
+  const { dataLamaran, dataPekerjaan, id, dataUser } = route.params;
   const [tempatInterview, setTempatInterview] = useState("");
 
   const UpdateTempatInterview = () => {
@@ -41,18 +41,30 @@ const FormInterview = ({ navigation, route }) => {
     update(ref(db, "Lamaran Kerja"), {
       [id]: updateDataLamaran,
     });
+
+    push(ref(db, "Notifikasi"), {
+      id_lamaran: id,
+      title: "Upcoming Interview",
+      message: `You've been invited for an interview for the position of ${dataPekerjaan["Job Title"]}. Make sure you're prepared and excited! `,
+    });
+
     setTempatInterview("");
     Alert.alert("You have successfully added an interview place");
     return navigation.navigate("DetailLamaran", {
       dataLamaran,
       dataPekerjaan,
       id,
+      dataUser,
     });
   };
 
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
-      <Navbar isBack={true} goBack={() => navigation.goBack()}></Navbar>
+      <Navbar
+        navigation={navigation}
+        isBack={true}
+        goBack={() => navigation.goBack()}
+      ></Navbar>
       <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar
           translucent

@@ -69,6 +69,7 @@ const RenderElement = ({ userLogin, navigation }) => {
         isBack={true}
         goBack={() => navigation.goBack()}
         isTitle="Report error"
+        navigation={navigation}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar

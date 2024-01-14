@@ -44,7 +44,12 @@ const Bantuan = ({ navigation }) => {
   });
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
-      <Navbar isBack={true} goBack={() => navigation.goBack()} isTitle="Help" />
+      <Navbar
+        navigation={navigation}
+        isBack={true}
+        goBack={() => navigation.goBack()}
+        isTitle="Help"
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar
           translucent

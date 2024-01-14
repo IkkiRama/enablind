@@ -17,6 +17,7 @@ import FormInterview from "./Pekerjaan/FormInterview";
 import AddVacancy from "./Pekerjaan/AddVacancy";
 import EditProfile from "./Profile/EditProfile";
 import SavedJobs from "./Profile/SavedJobs";
+import Notifikasi from "./Notifikasi/index";
 
 export {
   Home,
@@ -38,4 +39,5 @@ export {
   AddVacancy,
   EditProfile,
   SavedJobs,
+  Notifikasi,
 };

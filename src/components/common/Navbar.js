@@ -4,10 +4,17 @@ import {
   TextInput,
   View,
   KeyboardAvoidingView,
+  Alert,
 } from "react-native";
-import Search from "../../../assets/Icons/search.svg";
-import { COLORS } from "../../constants";
+import { getAuth } from "firebase/auth";
+import { ref, onValue } from "firebase/database";
+import React, { useEffect, useState } from "react";
 import { Ionicons, FontAwesome, MaterialIcons } from "@expo/vector-icons";
+
+import { COLORS } from "../../constants";
+import { db } from "../../configs/firebase";
+import Search from "../../../assets/Icons/search.svg";
+
 const Navbar = ({
   isBack,
   goBack,
@@ -21,7 +28,44 @@ const Navbar = ({
   setChangeFontSize,
   smallMessage,
   mainMessage,
+  navigation,
+  isShowNotifikasiPage = true,
 }) => {
+  const auth = getAuth();
+  const [notifikasi, setNotifikasi] = useState([]);
+  const [lamaran, setLamaran] = useState([]);
+
+  const lamaranUserLoginID = [];
+  const notifikasiUserLoginID = [];
+
+  useEffect(() => {
+    if (auth.currentUser !== null) {
+      onValue(ref(db, "Notifikasi"), (querySnapShot) => {
+        let data = querySnapShot.val() || {};
+        let dataNotifikasi = { ...data };
+        setNotifikasi(dataNotifikasi);
+      });
+
+      return onValue(ref(db, "Lamaran Kerja"), (querySnapShot) => {
+        let data = querySnapShot.val() || {};
+        let dataLamaran = { ...data };
+        setLamaran(dataLamaran);
+      });
+    }
+  }, []);
+
+  Object.keys(lamaran).map((id_lamaran) => {
+    if (lamaran[id_lamaran]["email"] === auth.currentUser.email) {
+      lamaranUserLoginID.push(id_lamaran);
+    }
+  });
+
+  Object.keys(notifikasi).map((id_notifikasi) => {
+    if (lamaranUserLoginID.includes(notifikasi[id_notifikasi]["id_lamaran"])) {
+      notifikasiUserLoginID.push(id_notifikasi);
+    }
+  });
+
   return (
     <View
       style={{
@@ -109,42 +153,53 @@ const Navbar = ({
           ""
         )}
 
-        <View
-          style={{
-            borderRadius: 50,
-            position: "relative",
-            marginRight: 5,
-          }}
-        >
-          <Ionicons
-            name="ios-notifications-outline"
-            size={25}
-            color={COLORS.font}
-          />
-          <View
+        {isShowNotifikasiPage ? (
+          <Pressable
+            onPress={() => navigation.navigate("Notifikasi")}
             style={{
-              width: 18,
-              height: 18,
-              justifyContent: "center",
-              alignItems: "center",
-              position: "absolute",
-              top: -3,
-              left: 12,
-              borderRadius: 5,
-              backgroundColor: COLORS.merah,
+              borderRadius: 50,
+              position: "relative",
+              marginRight: 5,
             }}
           >
-            <Text
-              style={{
-                color: COLORS.white,
-                fontSize: 11,
-                fontWeight: "600",
-              }}
-            >
-              9+
-            </Text>
-          </View>
-        </View>
+            <Ionicons
+              name="ios-notifications-outline"
+              size={25}
+              color={COLORS.font}
+            />
+            {auth.currentUser !== null && notifikasiUserLoginID.length > 0 ? (
+              <View
+                style={{
+                  width: 18,
+                  height: 18,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  position: "absolute",
+                  top: -3,
+                  left: 12,
+                  borderRadius: 5,
+                  backgroundColor: COLORS.merah,
+                }}
+              >
+                <Text
+                  style={{
+                    color: COLORS.white,
+                    fontSize: 11,
+                    fontWeight: "600",
+                  }}
+                >
+                  {notifikasiUserLoginID.length <= 9
+                    ? notifikasiUserLoginID.length
+                    : "9+"}
+                </Text>
+              </View>
+            ) : (
+              ""
+            )}
+          </Pressable>
+        ) : (
+          ""
+        )}
       </View>
     </View>
   );

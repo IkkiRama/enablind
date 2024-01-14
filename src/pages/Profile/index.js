@@ -91,7 +91,7 @@ const RenderElement = ({ navigation, userLogin }) => {
 
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
-      <Navbar />
+      <Navbar navigation={navigation} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar
           translucent
@@ -101,13 +101,13 @@ const RenderElement = ({ navigation, userLogin }) => {
 
         <View style={styles.containerWrapper}>
           <View style={styles.container}>
-            {image === null ? (
+            {image === "" || image === undefined || image === null ? (
               <View style={styles.imageContainer}>
                 <Ionicons name="person" size={50} color={COLORS.colorShadow} />
               </View>
             ) : (
               <View style={styles.imageContainer}>
-                <RenderImage link={userLogin.image} />
+                <RenderImage link={image} />
               </View>
             )}
 

@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, View, Pressable } from "react-native";
 
 import CekAuth from "../CekAuth";
 import { COLORS, images } from "../../../constants";
+import { Ionicons } from "@expo/vector-icons";
 
 const RenderImage = ({ link }) => {
   const [isLoadedImage, setIsLoadedImage] = useState(true);
@@ -62,7 +63,15 @@ const RenderElement = ({
       style={styles.wrapper}
     >
       {userLogin?.role === "company" ? (
-        <RenderImage link={dataUser["image"]} />
+        dataUser["image"] === "" ||
+        dataUser["image"] === undefined ||
+        dataUser["image"] === null ? (
+          <View style={styles.fotoDefaultUser}>
+            <Ionicons name="person" size={30} color={COLORS.colorShadow} />
+          </View>
+        ) : (
+          <RenderImage link={dataUser["image"]} />
+        )
       ) : (
         <RenderImage link={dataPekerjaan["Image Company"]} />
       )}
@@ -95,9 +104,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     margin: 5,
   },
+
+  fotoDefaultUser: {
+    width: "12%",
+    height: 45,
+    elevation: 1,
+    borderRadius: 3,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: COLORS.white,
+  },
   imageJob: {
     width: "12%",
-    height: 35,
+    height: 45,
+    borderRadius: 3,
   },
 
   infoJob: {

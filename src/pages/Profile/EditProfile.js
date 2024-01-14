@@ -14,7 +14,6 @@ import { useState, useEffect } from "react";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
 
-import { getAuth } from "firebase/auth";
 import { ref as sRef, uploadBytes } from "firebase/storage";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { ref, onValue, update } from "firebase/database";
@@ -266,7 +265,7 @@ const ReturnElement = ({ navigation, userLogin }) => {
 
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
-      <Navbar></Navbar>
+      <Navbar navigation={navigation}></Navbar>
       <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar
           translucent

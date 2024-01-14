@@ -43,15 +43,17 @@ const MyApplication = ({ navigation }) => {
   });
 
   const renderLamaran = () =>
-    dataLamaranUserKeys.map((id_lamaran) => (
-      <LamaranCard
-        navigation={navigation}
-        dataLamaran={dataLamaran[id_lamaran]}
-        dataPekerjaan={dataPekerjaan[dataLamaran[id_lamaran]["id_pekerjaan"]]}
-        key={id_lamaran}
-        id={id_lamaran}
-      ></LamaranCard>
-    ));
+    dataLamaranUserKeys
+      .reverse()
+      .map((id_lamaran) => (
+        <LamaranCard
+          navigation={navigation}
+          dataLamaran={dataLamaran[id_lamaran]}
+          dataPekerjaan={dataPekerjaan[dataLamaran[id_lamaran]["id_pekerjaan"]]}
+          key={id_lamaran}
+          id={id_lamaran}
+        ></LamaranCard>
+      ));
 
   return (
     <>

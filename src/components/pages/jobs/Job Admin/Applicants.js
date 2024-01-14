@@ -62,16 +62,19 @@ const Applicants = ({ navigation }) => {
   });
 
   const renderLamaran = () =>
-    idLamaranPekerjaPerusahaan.map((id_lamaran, i) => (
-      <ApplicantCard
-        navigation={navigation}
-        dataLamaran={dataLamaran[id_lamaran]}
-        dataPekerjaan={dataPekerjaan[dataLamaran[id_lamaran]["id_pekerjaan"]]}
-        dataUser={dataUser[idUser[i]]}
-        key={id_lamaran}
-        id={id_lamaran}
-      ></ApplicantCard>
-    ));
+    idLamaranPekerjaPerusahaan
+      .reverse()
+      .map((id_lamaran, i) => (
+        <ApplicantCard
+          navigation={navigation}
+          dataLamaran={dataLamaran[id_lamaran]}
+          dataPekerjaan={dataPekerjaan[dataLamaran[id_lamaran]["id_pekerjaan"]]}
+          dataUser={dataUser[idUser[idLamaranPekerjaPerusahaan.length - i - 1]]}
+          key={id_lamaran}
+          id={id_lamaran}
+        ></ApplicantCard>
+      ));
+  // console.log(dataUser);
 
   return (
     <>

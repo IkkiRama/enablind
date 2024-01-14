@@ -73,6 +73,7 @@ const DetailArtikel = ({ route, navigation }) => {
   return (
     <SafeAreaView style={SAFEAREAVIEW.style}>
       <Navbar
+        navigation={navigation}
         isBack={true}
         goBack={() => navigation.goBack()}
         isArtikel={true}
