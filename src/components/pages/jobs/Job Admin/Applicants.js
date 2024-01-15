@@ -74,7 +74,6 @@ const Applicants = ({ navigation }) => {
           id={id_lamaran}
         ></ApplicantCard>
       ));
-  // console.log(dataUser);
 
   return (
     <>
@@ -91,4 +90,13 @@ const Applicants = ({ navigation }) => {
 
 export default Applicants;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  noJobContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  noJobText: {
+    fontSize: 18,
+    fontWeight: "600",
+  },
+});

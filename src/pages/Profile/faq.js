@@ -19,7 +19,7 @@ const FAQ = ({ navigation }) => {
   const dataFAQKeys = Object.keys(dataFAQ);
 
   useEffect(() => {
-    return onValue(ref(db, "FAQ"), (querySnapShot) => {
+    return onValue(ref(db, "FAQ Enablind"), (querySnapShot) => {
       let data = querySnapShot.val() || {};
       let semuaFAQ = { ...data };
       setDataFAQ(semuaFAQ);

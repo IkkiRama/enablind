@@ -46,19 +46,28 @@ const AllJobs = ({ navigation, isSavedJobPage = false }) => {
       ></JobCard>
     ));
 
-  const RenderPekerjaanTersimpan = () =>
-    Id_Data_PT_UserLogin.map((id_pekerjaan_tersimpan) => (
-      <JobCard
-        navigation={navigation}
-        data={
-          dataPekerjaan[
-            pekerjaanTersimpan[id_pekerjaan_tersimpan]["id_pekerjaan"]
-          ]
-        }
-        key={id_pekerjaan_tersimpan}
-        id={pekerjaanTersimpan[id_pekerjaan_tersimpan]["id_pekerjaan"]}
-      ></JobCard>
-    ));
+  const RenderPekerjaanTersimpan = () => {
+    if (Id_Data_PT_UserLogin.length > 0) {
+      return Id_Data_PT_UserLogin.map((id_pekerjaan_tersimpan) => (
+        <JobCard
+          navigation={navigation}
+          data={
+            dataPekerjaan[
+              pekerjaanTersimpan[id_pekerjaan_tersimpan]["id_pekerjaan"]
+            ]
+          }
+          key={id_pekerjaan_tersimpan}
+          id={pekerjaanTersimpan[id_pekerjaan_tersimpan]["id_pekerjaan"]}
+        ></JobCard>
+      ));
+    } else {
+      return (
+        <View style={styles.noJobContainer}>
+          <Text style={styles.noJobText}>No Saved Job Available</Text>
+        </View>
+      );
+    }
+  };
 
   return (
     <>

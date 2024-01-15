@@ -85,7 +85,15 @@ const JobCard = ({ navigation, data, id, isCompany = false }) => {
       onPress={() => navigation.navigate("DetailJob", { data, id, isCompany })}
       style={styles.wrapper}
     >
-      <RenderImage link={data["Image Company"]} />
+      {data["Image Company"] === "" ||
+      data["Image Company"] === undefined ||
+      data["Image Company"] === null ? (
+        <View style={styles.fotoDefaultUser}>
+          <Ionicons name="person" size={30} color={COLORS.colorShadow} />
+        </View>
+      ) : (
+        <RenderImage link={data["Image Company"]} />
+      )}
 
       <View style={styles.infoJob}>
         {/* Title */}
@@ -151,6 +159,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     margin: 5,
   },
+
+  fotoDefaultUser: {
+    width: "15%",
+    height: 50,
+    elevation: 1,
+    borderRadius: 3,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: COLORS.white,
+  },
+
   imageJob: {
     width: "15%",
     height: 50,

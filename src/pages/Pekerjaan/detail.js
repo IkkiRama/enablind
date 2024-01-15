@@ -20,6 +20,7 @@ import {
 } from "../../components";
 
 import { COLORS, SAFEAREAVIEW, SHADOWS } from "../../constants";
+import { Ionicons } from "@expo/vector-icons";
 const DetailJob = ({ route, navigation }) => {
   return (
     <RenderElement
@@ -121,12 +122,24 @@ const RenderElement = ({ route, navigation, userLogin }) => {
           <View style={styles.container}>
             {/* Logo, nama pekerjaan dan perusahaan */}
             <View style={styles.infoJob}>
-              <Image
-                style={styles.infoJobImage}
-                source={{
-                  uri: data["Image Company"],
-                }}
-              ></Image>
+              {data["Image Company"] === "" ||
+              data["Image Company"] === undefined ||
+              data["Image Company"] === null ? (
+                <View style={[styles.infoJobImage, styles.fotoDefaultUser]}>
+                  <Ionicons
+                    name="person"
+                    size={30}
+                    color={COLORS.colorShadow}
+                  />
+                </View>
+              ) : (
+                <Image
+                  style={styles.infoJobImage}
+                  source={{
+                    uri: data["Image Company"],
+                  }}
+                ></Image>
+              )}
               <Text style={styles.infoJobTitle}>{data["Job Title"]}</Text>
               <Text style={styles.infoJobCompany}>{data["Company"]}</Text>
             </View>
@@ -142,7 +155,7 @@ const RenderElement = ({ route, navigation, userLogin }) => {
         </View>
       </ScrollView>
       <View style={styles.buttonContainer}>
-        {!isCompany && user?.role === "user" ? (
+        {user?.role === "user" || user?.role === undefined ? (
           <Pressable
             style={styles.buttonApply}
             onPress={() =>
@@ -202,6 +215,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
 
+  fotoDefaultUser: {
+    elevation: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: COLORS.white,
+  },
   infoJob: {
     paddingBottom: 10,
     alignItems: "center",

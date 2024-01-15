@@ -91,8 +91,7 @@ const ReturnElement = ({ navigation, userLogin }) => {
         Company: userLogin.nama,
         email: userLogin.email,
         "Job Title": jobTitle,
-        "Image Company":
-          "https://firebasestorage.googleapis.com/v0/b/react-native-crud-fireba-ea6c9.appspot.com/o/Enablind%2FLogo%20Perusahaan%2FKalbe%20Farma%20TBK.jpeg?alt=media&token=27d31474-016d-4956-92a3-be1f6539348e",
+        "Image Company": userLogin.image,
         "Type Job": typeJob,
         "Job Location": jobLocation,
         "Job Publish Date": formattedDate,

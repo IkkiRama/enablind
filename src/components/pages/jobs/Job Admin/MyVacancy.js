@@ -8,6 +8,7 @@ import { getAuth } from "firebase/auth";
 const MyVacancy = ({ navigation }) => {
   const auth = getAuth();
   const [dataPekerjaan, setDataPekerjaan] = useState([]);
+  const lowonganPerusahaanID = [];
 
   useEffect(() => {
     if (auth.currentUser !== null) {
@@ -19,28 +20,32 @@ const MyVacancy = ({ navigation }) => {
     }
   }, []);
 
+  Object.keys(dataPekerjaan).map((id_pekerjaan) => {
+    if (dataPekerjaan[id_pekerjaan]["email"] === auth.currentUser?.email) {
+      lowonganPerusahaanID.push(id_pekerjaan);
+    }
+  });
+
   const renderPekerjaan = () =>
-    Object.keys(dataPekerjaan).map((id_pekerjaan) => {
-      if (dataPekerjaan[id_pekerjaan]["email"] === auth.currentUser?.email) {
-        return (
-          <JobCard
-            navigation={navigation}
-            data={dataPekerjaan[id_pekerjaan]}
-            key={id_pekerjaan}
-            id={id_pekerjaan}
-            isCompany={true}
-          ></JobCard>
-        );
-      }
+    lowonganPerusahaanID.map((id_pekerjaan) => {
+      return (
+        <JobCard
+          navigation={navigation}
+          data={dataPekerjaan[id_pekerjaan]}
+          key={id_pekerjaan}
+          id={id_pekerjaan}
+          isCompany={true}
+        ></JobCard>
+      );
     });
 
   return (
     <>
-      {Object.keys(dataPekerjaan).length > 0 ? (
+      {lowonganPerusahaanID.length > 0 ? (
         renderPekerjaan()
       ) : (
         <View style={styles.noJobContainer}>
-          <Text style={styles.noJobText}>No Job Available</Text>
+          <Text style={styles.noJobText}>No Vacancy Available</Text>
         </View>
       )}
     </>

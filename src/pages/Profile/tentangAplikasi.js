@@ -44,12 +44,13 @@ const TentangAplikasi = ({ navigation }) => {
             </View>
             <Text style={styles.filosofiAplikasi}>
               Enablind is an innovative and inclusive mobile app specifically
-              designed to support the blind and visually impaired in their job
-              search. This app ensures to bring the concept of remote work
-              whereby every job seeker with visual disabilities has equal access
-              to job opportunities without having to face travel or physical
-              mobility constraints. With Enablind, users can feel confident in
-              finding jobs that match their interests, skills and abilities
+              designed to support people with disabilities especially the blind
+              and visually impaired in their job search. The app also has a
+              remote working concept where every job seeker with a visual
+              disability has equal access to employment opportunities without
+              having to face the constraints of travel or physical mobility.
+              With Enablind, users can feel confident in finding a job that
+              suits their interests, skills and abilities.
             </Text>
           </View>
         </View>
