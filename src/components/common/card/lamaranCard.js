@@ -24,6 +24,9 @@ const RenderImage = ({ link }) => {
 const LamaranCard = ({ navigation, dataLamaran, dataPekerjaan, id }) => {
   return (
     <Pressable
+      accessible={true}
+      accessibilityLabel={`my application for the position of ${dataPekerjaan["Job Title"]} at the ${dataPekerjaan["Company"]} company, ${dataPekerjaan["Job Location"]}, the status was ${dataLamaran["Status Lamaran"].status}`}
+      accessibilityRole="button"
       onPress={() =>
         navigation.navigate("DetailLamaran", {
           dataLamaran,

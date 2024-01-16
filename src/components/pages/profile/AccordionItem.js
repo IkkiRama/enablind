@@ -11,7 +11,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { COLORS } from "../../../constants";
 import { toggleAnimation } from "../../animations/toggleAnimation";
 
-const AccordionItem = ({ data }) => {
+const AccordionItem = ({ data, index }) => {
   const [showContent, setShowContent] = useState(false);
   const animationController = useRef(new Animated.Value(0)).current;
 
@@ -33,7 +33,11 @@ const AccordionItem = ({ data }) => {
   });
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => toggleListItem()}>
+      <TouchableOpacity
+        accessible={true}
+        accessibilityLabel={`FAQ numer ${index + 1}, ${data.judul}`}
+        onPress={() => toggleListItem()}
+      >
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{data.judul}</Text>
           <Animated.View style={{ transform: [{ rotateZ: arrowTransform }] }}>

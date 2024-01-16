@@ -27,6 +27,9 @@ const RenderImage = ({ link }) => {
   const [isLoadedImage, setIsLoadedImage] = useState(true);
   return (
     <Image
+      accessible={true}
+      accessibilityLabel={`Image user`}
+      accessibilityRole="image"
       onLoad={() => setIsLoadedImage(false)}
       style={styles.imageUser}
       source={
@@ -102,7 +105,11 @@ const RenderElement = ({ navigation, userLogin }) => {
         <View style={styles.containerWrapper}>
           <View style={styles.container}>
             {image === "" || image === undefined || image === null ? (
-              <View style={styles.imageContainer}>
+              <View
+                accessible={true}
+                accessibilityLabel={`Image user`}
+                style={styles.imageContainer}
+              >
                 <Ionicons name="person" size={50} color={COLORS.colorShadow} />
               </View>
             ) : (
@@ -120,6 +127,8 @@ const RenderElement = ({ navigation, userLogin }) => {
           {/* Main content */}
           <View style={styles.mainContainer}>
             <Pressable
+              accessible={true}
+              accessibilityRole="button"
               onPress={() => navigation.navigate("EditProfile")}
               style={styles.perFitur}
             >
@@ -131,6 +140,8 @@ const RenderElement = ({ navigation, userLogin }) => {
             </Pressable>
 
             <Pressable
+              accessible={true}
+              accessibilityRole="button"
               onPress={() => navigation.navigate("Saved Jobs")}
               style={styles.perFitur}
             >
@@ -142,6 +153,8 @@ const RenderElement = ({ navigation, userLogin }) => {
             </Pressable>
 
             <Pressable
+              accessible={true}
+              accessibilityRole="button"
               onPress={() => navigation.navigate("Bantuan")}
               style={styles.perFitur}
             >
@@ -153,6 +166,8 @@ const RenderElement = ({ navigation, userLogin }) => {
             </Pressable>
 
             <Pressable
+              accessible={true}
+              accessibilityRole="button"
               onPress={() => navigation.navigate("FAQ")}
               style={styles.perFitur}
             >
@@ -163,6 +178,8 @@ const RenderElement = ({ navigation, userLogin }) => {
               <FontAwesome name="chevron-right" size={24} color={COLORS.font} />
             </Pressable>
             <Pressable
+              accessible={true}
+              accessibilityRole="button"
               onPress={() => navigation.navigate("TentangAplikasi")}
               style={styles.perFitur}
             >
@@ -173,7 +190,12 @@ const RenderElement = ({ navigation, userLogin }) => {
               <FontAwesome name="chevron-right" size={24} color={COLORS.font} />
             </Pressable>
 
-            <Pressable onPress={() => handleLogout()} style={styles.perFitur}>
+            <Pressable
+              accessible={true}
+              accessibilityRole="button"
+              onPress={() => handleLogout()}
+              style={styles.perFitur}
+            >
               <View style={styles.nameFiturContainer}>
                 <Octicons name="sign-out" size={24} color={COLORS.font} />
                 <Text style={styles.profileFitur}>Exit</Text>

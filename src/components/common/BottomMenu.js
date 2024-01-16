@@ -13,6 +13,9 @@ const BottomMenu = ({ focused, navigationHandle, userLogin }) => {
   return (
     <View style={styles.menuWraper}>
       <TouchableOpacity
+        accessible={true}
+        accessibilityLabel="Home"
+        accessibilityRole="button"
         style={styles.menuButton(userLogin?.role)}
         onPress={() => navigationHandle.navigate("Beranda")}
       >
@@ -34,6 +37,9 @@ const BottomMenu = ({ focused, navigationHandle, userLogin }) => {
       </TouchableOpacity>
       {userLogin?.role === "company" ? (
         <TouchableOpacity
+          accessible={true}
+          accessibilityLabel="My Vacancy"
+          accessibilityRole="button"
           style={styles.menuButton(userLogin?.role)}
           onPress={() => navigationHandle.navigate("CompanyVacancy")}
         >
@@ -56,6 +62,9 @@ const BottomMenu = ({ focused, navigationHandle, userLogin }) => {
         </TouchableOpacity>
       ) : (
         <TouchableOpacity
+          accessible={true}
+          accessibilityLabel="Jobs"
+          accessibilityRole="button"
           style={styles.menuButton(userLogin?.role)}
           onPress={() => navigationHandle.navigate("Pekerjaan")}
         >
@@ -79,6 +88,9 @@ const BottomMenu = ({ focused, navigationHandle, userLogin }) => {
 
       {userLogin?.role === "company" ? (
         <TouchableOpacity
+          accessible={true}
+          accessibilityLabel="Add Vacancy"
+          accessibilityRole="button"
           style={[styles.menuButton(userLogin?.role), styles.spesialButton]}
           onPress={() => navigationHandle.navigate("Add Vacancy")}
         >
@@ -93,6 +105,9 @@ const BottomMenu = ({ focused, navigationHandle, userLogin }) => {
       )}
 
       <TouchableOpacity
+        accessible={true}
+        accessibilityLabel="Artikel"
+        accessibilityRole="button"
         style={styles.menuButton(userLogin?.role)}
         onPress={() => navigationHandle.navigate("Artikel")}
       >
@@ -114,6 +129,9 @@ const BottomMenu = ({ focused, navigationHandle, userLogin }) => {
       </TouchableOpacity>
 
       <TouchableOpacity
+        accessible={true}
+        accessibilityLabel="Profile"
+        accessibilityRole="button"
         style={styles.menuButton(userLogin?.role)}
         onPress={() => navigationHandle.navigate("Profile")}
       >

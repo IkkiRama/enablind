@@ -50,7 +50,11 @@ const FAQ = ({ navigation }) => {
             <View style={styles.faq}>
               {dataFAQKeys.length > 0 ? (
                 dataFAQKeys.map((key, index) => (
-                  <AccordionItem key={index} data={dataFAQ[key]} />
+                  <AccordionItem
+                    key={index}
+                    data={dataFAQ[key]}
+                    index={index}
+                  />
                 ))
               ) : (
                 <ActivityIndicator size="large" color={COLORS.primary} />

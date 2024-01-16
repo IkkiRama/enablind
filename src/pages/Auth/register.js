@@ -88,8 +88,6 @@ const Register = ({ navigation }) => {
             Alert.alert(error.message);
           }
         });
-    } else {
-      Alert.alert("You failed to register, please try again!");
     }
   };
 
@@ -102,6 +100,9 @@ const Register = ({ navigation }) => {
 
           <KeyboardAvoidingView>
             <TextInput
+              accessible={true}
+              accessibilityRole="keyboardkey"
+              accessibilityLabel={`enter your name`}
               style={styles.input}
               placeholder="Name"
               autoCapitalize="none"
@@ -110,6 +111,8 @@ const Register = ({ navigation }) => {
               onChangeText={(text) => setNama(text)}
             />
             <DropDownPicker
+              accessible={true}
+              accessibilityLabel={`enter your role`}
               open={open}
               value={tipeUser}
               items={items}
@@ -127,6 +130,9 @@ const Register = ({ navigation }) => {
             />
 
             <TextInput
+              accessible={true}
+              accessibilityRole="keyboardkey"
+              accessibilityLabel={`enter your email`}
               style={styles.input}
               placeholder="Email"
               autoCapitalize="none"
@@ -136,6 +142,9 @@ const Register = ({ navigation }) => {
               onChangeText={(text) => setEmail(text)}
             />
             <TextInput
+              accessible={true}
+              accessibilityRole="keyboardkey"
+              accessibilityLabel={`enter your password`}
               style={styles.input}
               placeholder="Password"
               autoCapitalize="none"
@@ -146,7 +155,13 @@ const Register = ({ navigation }) => {
               onChangeText={(text) => setPassword(text)}
             />
           </KeyboardAvoidingView>
-          <TouchableOpacity style={styles.button} onPress={onHandleSignup}>
+          <TouchableOpacity
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="register"
+            style={styles.button}
+            onPress={onHandleSignup}
+          >
             <Text
               style={{
                 fontWeight: "bold",

@@ -122,8 +122,6 @@ const FormApplay = ({ navigation, route }) => {
       reset();
       Alert.alert("You have successfully registered!");
       return navigation.replace("Pekerjaan");
-    } else {
-      Alert.alert("You failed to register, please try again!");
     }
   };
 
@@ -175,6 +173,8 @@ const FormApplay = ({ navigation, route }) => {
             <View style={styles.formGroup}>
               <Text style={styles.formText}>Active Phone Number</Text>
               <TextInput
+                accessible={true}
+                accessibilityRole="keyboardkey"
                 style={styles.input}
                 placeholder="Phone Number"
                 autoCapitalize="none"
@@ -188,6 +188,8 @@ const FormApplay = ({ navigation, route }) => {
             <View style={styles.formGroup}>
               <Text style={styles.formText}>House Address</Text>
               <TextInput
+                accessible={true}
+                accessibilityRole="keyboardkey"
                 style={[styles.input, styles.textArea]}
                 placeholder="Address"
                 autoCapitalize="none"
@@ -201,6 +203,8 @@ const FormApplay = ({ navigation, route }) => {
             <View style={styles.formGroup}>
               <Text style={styles.formText}>Summary</Text>
               <TextInput
+                accessible={true}
+                accessibilityRole="keyboardkey"
                 style={[styles.input, styles.textArea]}
                 placeholder="Summary"
                 autoCapitalize="none"
@@ -214,6 +218,8 @@ const FormApplay = ({ navigation, route }) => {
             <View style={styles.formGroup}>
               <Text style={styles.formText}>Education</Text>
               <TextInput
+                accessible={true}
+                accessibilityRole="keyboardkey"
                 style={[styles.input, styles.textArea]}
                 placeholder="Education (comma-separated)"
                 autoCapitalize="none"
@@ -227,6 +233,8 @@ const FormApplay = ({ navigation, route }) => {
             <View style={styles.formGroup}>
               <Text style={styles.formText}>Experience</Text>
               <TextInput
+                accessible={true}
+                accessibilityRole="keyboardkey"
                 style={[styles.input, styles.textArea]}
                 placeholder="Experience (comma-separated)"
                 autoCapitalize="none"
@@ -237,7 +245,12 @@ const FormApplay = ({ navigation, route }) => {
               />
             </View>
 
-            <Pressable style={styles.buttonApply} onPress={() => applyJob()}>
+            <Pressable
+              accessible={true}
+              accessibilityRole="button"
+              style={styles.buttonApply}
+              onPress={() => applyJob()}
+            >
               <Text style={styles.buttonApplyText}>SEND</Text>
             </Pressable>
           </View>

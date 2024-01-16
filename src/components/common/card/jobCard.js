@@ -82,6 +82,9 @@ const JobCard = ({ navigation, data, id, isCompany = false }) => {
 
   return (
     <Pressable
+      accessible={true}
+      accessibilityLabel={`job vacancies with ${data["Job Title"]} job title from ${data["Company"]} company, ${data["Job Location"]}, ${data["Jumlah Pelamar"]} applicants`}
+      accessibilityRole="button"
       onPress={() => navigation.navigate("DetailJob", { data, id, isCompany })}
       style={styles.wrapper}
     >
@@ -105,11 +108,23 @@ const JobCard = ({ navigation, data, id, isCompany = false }) => {
           {isCompany ? (
             ""
           ) : arrayIDPekerjaanTersimpan.includes(id) ? (
-            <Pressable onPress={RemoveSaveJob} style={styles.saveJobBTN}>
+            <Pressable
+              accessible={true}
+              accessibilityLabel="click to remove save job"
+              accessibilityRole="button"
+              onPress={RemoveSaveJob}
+              style={styles.saveJobBTN}
+            >
               <Ionicons name="ios-bookmark" size={25} color={COLORS.font} />
             </Pressable>
           ) : (
-            <Pressable onPress={SaveJob} style={styles.saveJobBTN}>
+            <Pressable
+              accessible={true}
+              accessibilityLabel="click to add save job"
+              accessibilityRole="button"
+              onPress={SaveJob}
+              style={styles.saveJobBTN}
+            >
               <Ionicons
                 name="ios-bookmark-outline"
                 size={25}

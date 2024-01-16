@@ -75,6 +75,9 @@ const Artikel = ({ navigation }) => {
                   <Text style={styles.sectionTitle}>Latest Article</Text>
                   {artikelPalingBaruKeys.map((key) => (
                     <Pressable
+                      accessible={true}
+                      accessibilityLabel={`Article with title
+                       ${dataArtikel[key]["judul"]}`}
                       key={key}
                       onPress={() =>
                         navigation.navigate("DetailArtikel", {

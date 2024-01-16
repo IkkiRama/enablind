@@ -134,14 +134,29 @@ const RenderElement = ({ route, navigation, userLogin }) => {
                 </View>
               ) : (
                 <Image
+                  accessible={true}
+                  accessibilityLabel="Image company"
+                  accessibilityRole="image"
                   style={styles.infoJobImage}
                   source={{
                     uri: data["Image Company"],
                   }}
                 ></Image>
               )}
-              <Text style={styles.infoJobTitle}>{data["Job Title"]}</Text>
-              <Text style={styles.infoJobCompany}>{data["Company"]}</Text>
+              <Text
+                accessible={true}
+                accessibilityLabel={data["Job Title"]}
+                style={styles.infoJobTitle}
+              >
+                {data["Job Title"]}
+              </Text>
+              <Text
+                accessible={true}
+                accessibilityLabel={data["Company"]}
+                style={styles.infoJobCompany}
+              >
+                {data["Company"]}
+              </Text>
             </View>
             {/* Descriptions, Qualifications, Other info */}
             <JobTabs
@@ -157,6 +172,9 @@ const RenderElement = ({ route, navigation, userLogin }) => {
       <View style={styles.buttonContainer}>
         {user?.role === "user" || user?.role === undefined ? (
           <Pressable
+            accessible={true}
+            accessibilityLabel="apply job"
+            accessibilityRole="button"
             style={styles.buttonApply}
             onPress={() =>
               navigation.navigate("FormApplay", {

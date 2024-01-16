@@ -85,6 +85,9 @@ const Login = ({ navigation }) => {
           <Text style={styles.title}>Login to your account</Text>
           <KeyboardAvoidingView>
             <TextInput
+              accessible={true}
+              accessibilityRole="keyboardkey"
+              accessibilityLabel={`enter your email to login to your account`}
               style={styles.input}
               placeholder="Email"
               autoCapitalize="none"
@@ -95,6 +98,9 @@ const Login = ({ navigation }) => {
               onChangeText={(text) => setEmail(text)}
             />
             <TextInput
+              accessible={true}
+              accessibilityRole="keyboardkey"
+              accessibilityLabel={`enter your password to login to your account`}
               style={styles.input}
               placeholder="Password"
               autoCapitalize="none"
@@ -105,7 +111,13 @@ const Login = ({ navigation }) => {
               onChangeText={(text) => setPassword(text)}
             />
           </KeyboardAvoidingView>
-          <TouchableOpacity style={styles.button} onPress={onHandleLogin}>
+          <TouchableOpacity
+            accessible={true}
+            accessibilityLabel={`login`}
+            accessibilityRole="button"
+            style={styles.button}
+            onPress={onHandleLogin}
+          >
             <Text
               style={{
                 fontWeight: "bold",

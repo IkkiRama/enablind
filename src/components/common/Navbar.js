@@ -80,11 +80,20 @@ const Navbar = ({
     >
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         {isBack ? (
-          <Pressable onPress={isFromHome ? goHome : goBack}>
+          <Pressable
+            accessible={true}
+            accessibilityLabel="back"
+            accessibilityRole="button"
+            onPress={isFromHome ? goHome : goBack}
+          >
             <FontAwesome name="chevron-left" size={24} color={COLORS.font} />
           </Pressable>
         ) : isHomePage ? (
-          <View>
+          <View
+            accessible={true}
+            accessibilityLabel="This is navbar"
+            accessibilityRole="header"
+          >
             <Text style={{ fontSize: 14 }}>{smallMessage}</Text>
             <Text style={{ fontSize: 18, fontWeight: "700" }}>
               {mainMessage}
@@ -129,6 +138,9 @@ const Navbar = ({
 
       {isTitle !== null ? (
         <Text
+          accessible={true}
+          accessibilityLabel={isTitle}
+          accessibilityRole="header"
           style={{
             color: COLORS.font,
             fontWeight: "600",
@@ -144,6 +156,8 @@ const Navbar = ({
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         {isArtikel ? (
           <Pressable
+            accessibilityLabel="Change font size"
+            accessibilityRole="button"
             onPress={() => setChangeFontSize(!changeFontSize)}
             style={{ marginRight: 15 }}
           >
@@ -155,6 +169,9 @@ const Navbar = ({
 
         {isShowNotifikasiPage ? (
           <Pressable
+            accessible={true}
+            accessibilityLabel="notification"
+            accessibilityRole="button"
             onPress={() => navigation.navigate("Notifikasi")}
             style={{
               borderRadius: 50,

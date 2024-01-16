@@ -7,10 +7,15 @@ const RekomendasiArtikel = ({ navigation, artikel }) => {
   const [isLoadedImage, setIsLoadedImage] = useState(true);
   return (
     <Pressable
+      accessible={true}
+      accessibilityLabel={`Article with title ${artikel["judul"]} written at ${artikel["terbit"]} by ${artikel.penulis}`}
       onPress={() => navigation.navigate("DetailArtikel", { artikel })}
       style={styles.rekomendasiArtikel}
     >
       <Image
+        accessible={true}
+        accessibilityLabel={`Image Article`}
+        accessibilityRole="image"
         onLoad={() => setIsLoadedImage(false)}
         source={
           isLoadedImage
@@ -25,7 +30,7 @@ const RekomendasiArtikel = ({ navigation, artikel }) => {
         <Text style={styles.titleArtikel} numberOfLines={2}>
           {artikel.judul}
         </Text>
-        <Text style={styles.tanggalArtikel}>Ditulis pada {artikel.terbit}</Text>
+        <Text style={styles.tanggalArtikel}>Written at {artikel.terbit}</Text>
       </View>
     </Pressable>
   );

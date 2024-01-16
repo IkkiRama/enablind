@@ -95,6 +95,9 @@ const DetailArtikel = ({ route, navigation }) => {
             <View style={styles.changeFontSizeButtonContainer}>
               {ukuranFont.map((ukuran, i) => (
                 <Pressable
+                  accessible={true}
+                  accessibilityLabel={`click to change font size to ${ukuran.title}`}
+                  accessibilityRole="button"
                   onPress={() => setUkuranFontActive(ukuran)}
                   key={i}
                   style={styles.changeFontSizeButton(
@@ -113,20 +116,38 @@ const DetailArtikel = ({ route, navigation }) => {
 
         <View style={styles.containerWrapper}>
           {/* change font isArtikel */}
-          <Text style={styles.titleArtikel}>{artikel.judul}</Text>
-          <Text style={styles.authorArtikelContainer}>
+          <Text
+            accessible={true}
+            accessibilityLabel={`article with title ${artikel.judul}`}
+            style={styles.titleArtikel}
+          >
+            {artikel.judul}
+          </Text>
+          <Text
+            accessible={true}
+            accessibilityLabel={`article written by ${artikel.penulis} at ${artikel.terbit}`}
+            style={styles.authorArtikelContainer}
+          >
             Written by{" "}
             <Text style={styles.authorArtikel}>{artikel.penulis} </Text> at{" "}
             {artikel.terbit}
           </Text>
           <View style={styles.kategoriContainer}>
             {artikel.kategori.map((kategoriArtikel, index) => (
-              <View key={index} style={styles.kategori}>
+              <View
+                accessible={true}
+                accessibilityLabel={`category article ${kategoriArtikel}`}
+                key={index}
+                style={styles.kategori}
+              >
                 <Text style={styles.textKategori}>{kategoriArtikel}</Text>
               </View>
             ))}
           </View>
           <Image
+            accessible={true}
+            accessibilityLabel="image article"
+            accessibilityRole="image"
             onLoad={() => setIsLoadedImage(false)}
             style={styles.imageArtikel}
             source={

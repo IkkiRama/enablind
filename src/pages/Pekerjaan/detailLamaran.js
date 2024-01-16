@@ -213,7 +213,11 @@ const RenderElement = ({ navigation, route, userLogin }) => {
         ></StatusBar>
 
         <View style={styles.mainWrapper(height)}>
-          <View style={styles.jobInformationWrapper}>
+          <View
+            accessible={true}
+            accessibilityLabel={`my application for the position of ${dataPekerjaan["Job Title"]} at the ${dataPekerjaan["Company"]} company, ${dataPekerjaan["Job Location"]}, the status was ${dataLamaran["Status Lamaran"].status}`}
+            style={styles.jobInformationWrapper}
+          >
             <View style={styles.imageJobContainer}>
               {/* {dataUser["image"] === "" ||
               dataUser["image"] === undefined ||

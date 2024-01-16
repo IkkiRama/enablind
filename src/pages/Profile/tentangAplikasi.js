@@ -36,13 +36,20 @@ const TentangAplikasi = ({ navigation }) => {
           <View style={styles.container}>
             <View style={styles.imageTentangAplikasiContainer}>
               <Image
+                accessible={true}
+                accessibilityRole="image"
+                accessibilityLabel="Enablind logo"
                 source={{
                   uri: "https://firebasestorage.googleapis.com/v0/b/react-native-crud-fireba-ea6c9.appspot.com/o/Enablind%2Ficon.png?alt=media&token=d97bef32-1681-4b4d-943b-30f36189c101",
                 }}
                 style={styles.imageTentangAplikasi}
               />
             </View>
-            <Text style={styles.filosofiAplikasi}>
+            <Text
+              accessible={true}
+              accessibilityRole="text"
+              style={styles.filosofiAplikasi}
+            >
               Enablind is an innovative and inclusive mobile app specifically
               designed to support people with disabilities especially the blind
               and visually impaired in their job search. The app also has a

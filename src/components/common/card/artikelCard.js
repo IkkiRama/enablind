@@ -7,10 +7,15 @@ const ArtikelCard = ({ navigation, artikel }) => {
   const [isLoadedImage, setIsLoadedImage] = useState(true);
   return (
     <Pressable
+      accessible={true}
+      accessibilityLabel={`Article with title ${artikel["judul"]} written at ${artikel["terbit"]} by ${artikel.penulis}`}
       onPress={() => navigation.navigate("DetailArtikel", { artikel })}
       style={styles.artikel}
     >
       <Image
+        accessible={true}
+        accessibilityLabel={`Image Article`}
+        accessibilityRole="image"
         onLoad={() => setIsLoadedImage(false)}
         source={
           isLoadedImage

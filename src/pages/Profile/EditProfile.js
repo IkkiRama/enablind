@@ -280,6 +280,8 @@ const ReturnElement = ({ navigation, userLogin }) => {
             <View style={styles.formGroup}>
               <Text style={styles.formText}>Full Name</Text>
               <TextInput
+                accessible={true}
+                accessibilityRole="keyboardkey"
                 style={styles.input}
                 placeholder="Name"
                 autoCapitalize="none"

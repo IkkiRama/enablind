@@ -55,6 +55,9 @@ const HomeArtikel = ({ navigation }) => {
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <Pressable
+              accessible={true}
+              accessibilityLabel={`Article with title ${SeriesArtikel[item].judul}`}
+              accessibilityRole="tab"
               key={item}
               style={{ margin: 5 }}
               onPress={() =>

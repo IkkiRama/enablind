@@ -9,7 +9,10 @@ const MyInformation = ({ data }) => {
     experience = data["experience"].join(", ");
   }
   return (
-    <View>
+    <View
+      accessible={true}
+      accessibilityLabel={`my personal information with full name is ${data["nama"]}, email ${data["email"]}, active phone numer ${data["phoneHumber"]}, house addres ${data["house"]}, education ${education}, experience ${experience}, and summary ${data["summary"]}`}
+    >
       <View style={styles.titleContainer}>
         <Text style={styles.titleInformation}>Full Name</Text>
         <Text style={styles.userInformation}>{data["nama"]}</Text>

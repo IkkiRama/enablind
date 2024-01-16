@@ -67,6 +67,10 @@ const Bantuan = ({ navigation }) => {
             {/* Bantuan */}
             <View style={styles.bantuanWrapper}>
               <Pressable
+                accessible={true}
+                accessibilityLabel="WhatsApp"
+                accessibilityHint="Open on browser"
+                accessibilityRole="link"
                 onPress={() =>
                   OpenAnything.Open(
                     `https://api.whatsapp.com/send/?phone=%2B6282133320489&text=Hello,%20my%20name%20is%20${userLogin.nama}.%20I%20would%20like%20to%20submit%20my%20complaint%20regarding%20the%20Enablind%20application.`
@@ -95,6 +99,10 @@ const Bantuan = ({ navigation }) => {
               </Pressable>
 
               <Pressable
+                accessible={true}
+                accessibilityLabel="instagram"
+                accessibilityHint="Open on browser"
+                accessibilityRole="link"
                 onPress={() =>
                   OpenAnything.Open("https://www.instagram.com/george_ikki/")
                 }
@@ -121,13 +129,17 @@ const Bantuan = ({ navigation }) => {
               </Pressable>
 
               <Pressable
+                accessible={true}
+                accessibilityLabel="call"
+                accessibilityHint="Open on call app"
+                accessibilityRole="link"
                 onPress={() => OpenAnything.Call("+6282133320489")}
                 style={styles.perBantuan}
               >
                 <View style={styles.perBantuanTextContainer}>
                   <View style={styles.perBantuanTitleContainer}>
                     <FontAwesome name="phone" size={20} color={COLORS.font} />
-                    <Text style={styles.perBantuanTitle}>Telepon</Text>
+                    <Text style={styles.perBantuanTitle}>Call</Text>
                   </View>
                   <Text style={styles.perBantuanText}>+6282133320489</Text>
                 </View>
@@ -139,6 +151,10 @@ const Bantuan = ({ navigation }) => {
               </Pressable>
 
               <Pressable
+                accessible={true}
+                accessibilityLabel="email"
+                accessibilityHint="Open on email"
+                accessibilityRole="link"
                 onPress={() =>
                   OpenAnything.Email(
                     "georgeikkirama@gmail.com",
@@ -169,6 +185,9 @@ const Bantuan = ({ navigation }) => {
               </Pressable>
 
               <Pressable
+                accessible={true}
+                accessibilityLabel="report error"
+                accessibilityRole="button"
                 onPress={() => navigation.navigate("LaporEror")}
                 style={styles.perBantuan}
               >

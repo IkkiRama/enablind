@@ -11,6 +11,9 @@ import { COLORS, SIZES, SHADOWS } from "../../../../constants";
 
 const TabButton = ({ name, activeTab, onHandleSearchType }) => (
   <TouchableOpacity
+    accessible={true}
+    accessibilityLabel={name}
+    accessibilityRole="button"
     style={styles.btn(name, activeTab)}
     onPress={onHandleSearchType}
   >

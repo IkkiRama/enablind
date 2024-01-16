@@ -85,6 +85,8 @@ const RenderElement = ({ userLogin, navigation }) => {
                 <Text style={styles.formText}>Title error</Text>
                 <KeyboardAvoidingView>
                   <TextInput
+                    accessible={true}
+                    accessibilityRole="keyboardkey"
                     value={judul}
                     style={styles.textInput}
                     placeholder="Enter your error title..."
@@ -99,6 +101,8 @@ const RenderElement = ({ userLogin, navigation }) => {
                 </Text>
                 <KeyboardAvoidingView>
                   <TextInput
+                    accessible={true}
+                    accessibilityRole="keyboardkey"
                     value={message}
                     multiline={true}
                     numberOfLines={4}
