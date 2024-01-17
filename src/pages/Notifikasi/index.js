@@ -113,6 +113,21 @@ const RenderElement = ({ navigation, userLogin }) => {
   const RenderNotifikasi = () =>
     notifikasiUserLoginID.map((id_notifikasi, i) => (
       <Pressable
+        accessible={true}
+        accessibilityRole="button"
+        accessibilityLabel={`notification number ${
+          i + 1
+        }, notification of your application for the position of ${
+          pekerjaan[
+            lamaran[notifikasi[id_notifikasi]["id_lamaran"]]["id_pekerjaan"]
+          ]["Job Title"]
+        } at the company tokopedia that you have been ${
+          notifikasi[id_notifikasi]["title"] === "Rejection Notice"
+            ? "Rejected"
+            : notifikasi[id_notifikasi]["title"] === "Upcoming Interview"
+            ? "invited for an interview"
+            : "accepted"
+        }`}
         onPress={() =>
           onPressHandler(
             id_notifikasi,
